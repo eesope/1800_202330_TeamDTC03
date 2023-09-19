@@ -8,7 +8,7 @@ This browser based web application to ...
 List team members and/or short bio's here... 
 * Hi, My name is Saeyoung! I am excited to start this journey of creating a web application.
 * Hi, my name is Tony! I am excited to do this project because I love to make this city smarter with tech.
-* Hi, my name is Ella!I am excited to start this project!
+* Hi, my name is Ella!I am excited to start this project! I hope this project turns out wonderful!
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
