@@ -5,3 +5,8 @@
 .bg-info {
     background-color: #BAE8E8 !important;
 }
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Young Serif', serif;
+}
