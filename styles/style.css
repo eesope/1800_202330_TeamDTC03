@@ -10,3 +10,34 @@
     font-family: 'Josefin Sans', sans-serif;
     font-family: 'Young Serif', serif;
 }
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.container img {
+    width: 100%;
+    height: auto;
+}
+
+.container .back-btn {
+    position: absolute;
+    top: 15%;
+    left: 12%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 20px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.container .btn:hover {
+    background-color: black;
+}
