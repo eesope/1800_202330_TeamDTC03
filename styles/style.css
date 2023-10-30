@@ -41,3 +41,26 @@
 .container .btn:hover {
     background-color: black;
 }
+
+#current_location {
+    margin-top: 10px;
+}
+
+#search_location {
+    margin: 10px !important;
+    width: 95%;
+}
+
+#change_view {
+    margin: 10px !important;
+    width: 95%;
+
+}
+
+.card {
+    margin: 10px !important;
+}
+
+.list_cards {
+    display: auto !important;
+}
