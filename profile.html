@@ -34,8 +34,14 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <link rel="stylesheet" href="./styles/style.css">
 
+    <!-- Google Icons (Material Design)-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -48,11 +54,28 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-    <div class="container" style="background-color:paleturquoise">
-        <h1>Let's Login to VanWater!</h1>
+    <div class="card">
+        <div class="back-btn">
+            <button class="btn back-btn btn-lg" style="background-color: #555" href="#" role="button"><span
+                    class="material-symbols-outlined">arrow_back</span></button>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Hi User name</h5>
+            <p class="card-text">You have saved X
+                plastic bottles with VanWater!</p>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                Account Info
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">Notifications</a>
+            <a href="#" class="list-group-item list-group-item-action">My reviews</a>
+            <a href="#" class="list-group-item list-group-item-action">My photos</a>
+        </div>
+        <div class="logout d-flex justify-content-center mt-5">
+            <button class="btn btn-primary btn-lg" href="#" role="button">Log out</button>
+        </div>
     </div>
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
 
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>
@@ -62,7 +85,6 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_DTC03.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/authentication.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
 
 </body>

@@ -14,8 +14,11 @@
     <!------------------------------------------>
     <!-- Bootstrap Library CSS JS CDN go here -->
     <!------------------------------------------>
+    <!-- Bootstrap Library CSS CDN go here -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Boostrap Library JS CDN  go here -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
@@ -33,9 +36,7 @@
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
-
+    <link rel="stylesheet" href="./styles/style.css">
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -48,7 +49,85 @@
 
 
     <!-- the body of your page goes here -->
-    <!-- stuff -->
+
+    <div id="top_main">
+        <div id="current_location" class="d-flex">
+            <i id="my_location_icon" class="material-icons">my_location</i>
+            <div>V6B 3H6, Vancouver</div>
+        </div>
+
+        <div id="search_location" class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"><i class="material-icons">search</i></span>
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" placeholder="Search the location...">
+        </div>
+
+        <div id="change_view" class="d-flex text-center border border-primary-subtle rounded-3">
+            <div class="p-2 flex-fill bg-primary rounded-3 text-light">List</div>
+            <div class="p-2 flex-fill">Map</div>
+        </div>
+
+    </div>
+
+    <div class="dropdown">
+        Sorted by:
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Distance
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item active" href="#">Distance</a></li>
+            <li><a class="dropdown-item" href="#">Rating</a></li>
+            <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
+        </ul>
+    </div>
+    </div>
+
+    <div id="list_cards">
+        <div id="first_location" class="card" style="width: 18rem;">
+            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+            </div>
+        </div>
+
+        <div id="second_location" class="card" style="width: 18rem;">
+            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+            </div>
+        </div>
+
+        <div id="third_location" class="card" style="width: 18rem;">
+            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+            </div>
+        </div>
+
+        <div id="fourth_location" class="card" style="width: 18rem;">
+            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+            </div>
+        </div>
+
+        <div id="fifth_location" class="card" style="width: 18rem;">
+            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- our own footer goes here-->
     <footer class="navbar justify-content-evenly bg-info fixed-bottom">
