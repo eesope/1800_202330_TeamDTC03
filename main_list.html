@@ -83,50 +83,33 @@
     </div>
 
     <div id="list_cards">
-        <div id="first_location" class="card" style="width: 18rem;">
-            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+
+        <div class="container">
+            <h1>My reviews</h1>
+            <!-- Here is the container for cards  -->
+            <div class="container">
+                <div id="drinking_water_fountains-go-here" class="row row-cols-auto">
+                </div>
             </div>
         </div>
 
-        <div id="second_location" class="card" style="width: 18rem;">
-            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+        <!-- Templates for general use, not displayed -->
+        <template id="waterCardTemplate">
+            <div class="card py-2 mx-2" style="width: 18rem">
+                <img class="card-image card-img-top" src="./images/water_fountain.jpg" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-operation">placeholder</p>
+                    <br />
+                    <p class="card-text">
+                        Some quick example text to build on the card title and make up the
+                        bulk of the card's content.
+                    </p>
+                    <a class="btn btn-primary card-href">Read more ...</a>
+                </div>
             </div>
-        </div>
+        </template>
 
-        <div id="third_location" class="card" style="width: 18rem;">
-            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-            </div>
-        </div>
-
-        <div id="fourth_location" class="card" style="width: 18rem;">
-            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-            </div>
-        </div>
-
-        <div id="fifth_location" class="card" style="width: 18rem;">
-            <img src="./images/water_fountain.jpg" class="card-img-top" alt="general information of water fountain">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-            </div>
-        </div>
     </div>
 
     <!-- our own footer goes here-->
@@ -144,7 +127,7 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_DTC03.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/main.js"></script>
 
 </body>
 
