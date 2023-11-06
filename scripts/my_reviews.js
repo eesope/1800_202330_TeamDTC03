@@ -1,8 +1,8 @@
 function addReviews() {
     //define a variable for the collection you want to create in Firestore to populate data
-    var hikesRef = db.collection("my_reviews");
+    var myReviews = db.collection("my_reviews");
 
-    hikesRef.add({
+    myReviews.add({
         code: "drink1",
         name: "Water fountain #1",
         region: "Downtown",
@@ -10,7 +10,7 @@ function addReviews() {
         rating: "5 out of 5",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
-    hikesRef.add({
+    myReviews.add({
         code: "drink2",
         name: "Water fountain #2",
         region: "Mapole Ridge",
@@ -18,7 +18,7 @@ function addReviews() {
         rating: "5 out of 5",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
-    hikesRef.add({
+    myReviews.add({
         code: "drink3",
         name: "Water fountain #3",
         region: "China Town",
@@ -34,12 +34,12 @@ function addReviews() {
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("hikeCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("myReviewTemplate"); // Retrieve the HTML element with the ID "myReviewTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection called "hikes"
-        .then(allHikes => {
+        .then(allReviews => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
-            allHikes.forEach(doc => { //iterate thru each doc
+            allReviews.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 //var details = doc.data().details;  // get value of the "details" key
                 var hikeCode = doc.data().code;    //get unique ID to each hike to be used for fetching right image
