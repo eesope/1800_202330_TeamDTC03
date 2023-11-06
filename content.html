@@ -29,6 +29,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
@@ -92,9 +93,17 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="d-grid gap-2">
+    <!-- <div class="d-grid gap-2">
         <button class="btn btn-primary mb-3" type="button">Add a Photo +</button>
+    </div> -->
+    <div class="d-grid gap-2">
+        <label for="mypic-input" class="btn btn-primary btn-block btn-outlined">Add a Photo +</label>
+        <input id="mypic-input" style="visibility:hidden;" type="file">
     </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <img id="mypic-goes-here" width=100 height=100 />
+    <button type="button" class="btn btn-info btn-line-height" onclick="savePost()">Post Now</button>    
+</div>
     <div class="overflow-auto">
         <div class="info">
             <div>
@@ -133,6 +142,7 @@
     <script src="./scripts/firebaseAPI_DTC03.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/upload_photo.js"></script>
 
 </body>
 
