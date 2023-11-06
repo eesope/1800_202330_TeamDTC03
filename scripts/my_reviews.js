@@ -7,6 +7,7 @@ function addReviews() {
         name: "Water fountain #1",
         region: "Downtown",
         comment: "Great water fountain",
+        rating: "5 out of 5",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
     hikesRef.add({
@@ -14,6 +15,7 @@ function addReviews() {
         name: "Water fountain #2",
         region: "Mapole Ridge",
         comment: "Great water fountain",
+        rating: "5 out of 5",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
     hikesRef.add({
@@ -21,11 +23,12 @@ function addReviews() {
         name: "Water fountain #3",
         region: "China Town",
         comment: "Dirty water fountain",
+        rating: "2 out of 5",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
 }
 
-addReviews(); //calling the function
+
 
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
@@ -43,6 +46,7 @@ function displayCardsDynamically(collection) {
                 //var hikeLength = doc.data().length; //gets the length field
                 var region = doc.data().region; //gets the region field
                 var comment = doc.data().comment; //gets the comment field
+                var rating = doc.data().rating; //gets the rating field
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
@@ -52,6 +56,8 @@ function displayCardsDynamically(collection) {
                 //newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-region').innerHTML = region;
                 newcard.querySelector('.card-comment').innerHTML = comment;
+                newcard.querySelector('.card-rating').innerHTML = rating;
+                console.log(rating)
                 newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachHike.html?docID=" + docID;
 
@@ -67,6 +73,8 @@ function displayCardsDynamically(collection) {
             })
         })
 }
+
+addReviews(); //calling the function
 
 displayCardsDynamically("my_reviews");  //input param is the name of the collection
 
