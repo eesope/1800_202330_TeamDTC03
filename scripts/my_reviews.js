@@ -38,12 +38,11 @@ function displayCardsDynamically(collection) {
 
     db.collection(collection).get()   //the collection called "hikes"
         .then(allReviews => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            //var i = 1;  //Optional: if you want to have a unique ID for each review
             allReviews.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 //var details = doc.data().details;  // get value of the "details" key
-                var hikeCode = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                //var hikeLength = doc.data().length; //gets the length field
+                var fountainCode = doc.data().code;    //get unique ID to each fountain to be used for fetching right image
                 var region = doc.data().region; //gets the region field
                 var comment = doc.data().comment; //gets the comment field
                 var rating = doc.data().rating; //gets the rating field
@@ -52,13 +51,11 @@ function displayCardsDynamically(collection) {
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
-                //newcard.querySelector('.card-length').innerHTML = hikeLength + "km";
-                //newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-region').innerHTML = region;
                 newcard.querySelector('.card-comment').innerHTML = comment;
                 newcard.querySelector('.card-rating').innerHTML = rating;
                 console.log(rating)
-                newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('.card-image').src = `./images/${fountainCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachHike.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
