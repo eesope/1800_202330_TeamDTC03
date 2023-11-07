@@ -71,7 +71,7 @@ function displayCardsDynamically(collection) {
         })
 }
 
-addReviews(); //calling the function
+// addReviews(); //calling the function
 
 displayCardsDynamically("my_reviews");  //input param is the name of the collection
 
