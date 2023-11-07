@@ -40,6 +40,9 @@
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+
 </head>
 
 <body>
@@ -83,9 +86,29 @@
     </div>
 
     <div id="map_view">
-        Need to fix API for map
-        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
-            src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ4S7wxnhxhlQRFGfmMvQ74LQ&key=..."></iframe>
+        <!-- Main Body -->
+        <main>
+            <!-- MAPBOX -->
+            <h2>Map View Holder</h2>
+            <div id='map' style='width: 100%; height: 400px;'></div>
+            <!-- MAPBOX -->
+            <div>
+                <div class="card">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Need Suggestion?</h5>
+                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione eos,
+                        molestias
+                        dolore deleniti repellendus quam eligendi consequatur asperiores in nostrum ex error.
+                        Voluptatibus,
+                        odio reiciendis, aliquam accusantium distinctio perferendis dolorum voluptatum odit delectus
+                        iste
+                        quisquam impedit inventore eos unde perspiciatis nam earum ad rem, nesciunt quam? Laudantium
+                        voluptates repellat unde.</p>
+                </div>
+            </div>
+        </main>
+
     </div>
 
     <!-- our own footer goes here-->
@@ -103,6 +126,7 @@
     <script src="./scripts/firebaseAPI_DTC03.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/map.js"></script>
 
 </body>
 
