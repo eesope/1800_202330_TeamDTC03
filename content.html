@@ -60,9 +60,7 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-    <div id="carouselExampleIndicators" class="container carousel slide mb-1 " data-bs-ride="carousel">
-        <button class="btn btn-lg" style="background-color: #555" href="#" role="button"><span
-                class="material-symbols-outlined">arrow_back</span></button>
+    <div id="carouselExampleIndicators" class="carousel slide mb-1" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -93,56 +91,55 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <!-- <div class="d-grid gap-2">
-        <button class="btn btn-primary mb-3" type="button">Add a Photo +</button>
-    </div> -->
     <div class="d-grid gap-2">
         <label for="mypic-input" class="btn btn-primary btn-block btn-outlined">Add a Photo +</label>
         <input id="mypic-input" style="visibility:hidden;" type="file">
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-    <img id="mypic-goes-here" width=100 height=100 />
-    <button type="button" class="btn btn-info btn-line-height" onclick="savePost()">Post Now</button>    
-</div>
+    <div class="d-grid gap-2 d-md-flex justify-content-center">
+        <img id="mypic-goes-here" width=100 height=100 />
+        <button type="button" class="btn btn-info btn-line-height" onclick="savePost()">Post Now</button>
+    </div>
     <div class="overflow-auto">
         <div class="info">
             <div>
                 <h3>Water fountain #1</h3>
             </div>
-            <div class="review_container">
-                <h4>Reviews</h4>
+            <div class="bg-info mb-2">
+                <h5> Review</h5>
                 <div class="containers">
-                    <div>Kevin
+                    <div><img src="./images/puppy_one.jpg" alt="puppy_one" width="70px">Kevin
                         <span>★★★★★</span>
                     </div>
-
-                    <div>My puppy loves this water fountain! Very clean and pet friendly!</div>
+                </div>
+                <div>My puppy loves this water fountain! Very clean and pet friendly!</div>
+            </div>
+            <div>
+                <button type="button" class="btn bg-warning btn-line-height container-fluid"><a href="writing_reviews.html">Write a review</a></button>
+                <div class="container mt-3"></div>
+                <div class="water-quality-table">
+                    <h4>Water quality</h4>
+                    <p>Water Sample Station Readings</p>
+                    <p>For XXX Region</p>
+                    <img src="./images/water_quality.jpg" alt="hero" style="width:100%">
                 </div>
             </div>
-            <div class="water-quality-table">
-                <h4>Water quality</h4>
-                <p>Water Sample Station Readings</p>
-                <p>For XXX Region</p>
-                <img src="./images/water_quality.jpg" alt="hero" style="width:100%">
-            </div>
         </div>
-    </div>
 
-    <div class="get-directions d-flex justify-content-center mt-5">
-        <button class="btn btn-primary btn-lg" href="#" role="button">Get
-            Directions</button>
-    </div>
+        <div class="get-directions d-flex justify-content-center mt-5">
+            <button class="btn btn-primary btn-lg" href="#" role="button">Get
+                Directions</button>
+        </div>
 
-    <!-- our own footer goes here-->
-    <nav id="footerPlaceholder"></nav>
+        <!-- our own footer goes here-->
+        <nav id="footerPlaceholder"></nav>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-    <script src="./scripts/firebaseAPI_DTC03.js"></script>
-    <script src="./scripts/skeleton.js"></script>
-    <!-- <script src="./scripts/script.js"></script> -->
-    <script src="./scripts/upload_photo.js"></script>
+        <!---------------------------------------------->
+        <!-- Your own JavaScript functions go here    -->
+        <!---------------------------------------------->
+        <script src="./scripts/firebaseAPI_DTC03.js"></script>
+        <script src="./scripts/skeleton.js"></script>
+        <!-- <script src="./scripts/script.js"></script> -->
+        <script src="./scripts/upload_photo.js"></script>
 
 </body>
 
