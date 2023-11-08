@@ -64,3 +64,8 @@
 .list_cards {
     display: auto !important;
 }
+
+/* move the get-directions button not covered by the footer */
+.get-directions {
+    margin-bottom: 120px;
+}
