@@ -38,43 +38,30 @@
 
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        .containers {
-            height: 200px;
-            background-color: rgb(203, 202, 202);
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-
-        img {
-            height: 100px;
-            margin: 5px;
-        }
-
-        .container .back-btn {
-            position: absolute;
-            top: 15%;
-            left: 12%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: #555;
-            color: white;
-            font-size: 20px;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 100px;
-            text-align: center;
-        }
-    </style>
-
 </head>
 
 <body>
-    <div class="container-fluid">
-        <h5>Review</h3>
-            <input type="text" class="form-control mt-2" id="title" placeholder="title">
-            <textarea class="form-control mt-2" id="content" placeholder="content"></textarea>
+    <div class="container mt-3">
+        <br>
+        <h1>Review</h1>
+        <br>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Add a title</label>
+                <input type="text" class="form-control" id="title" placeholder="Title">
+            </div><br>
+            <div class="card-body">
+                <p>Rate your overall experience:</p>
+                <span class="material-icons star" id="star1">star_outline</span>
+                <span class="material-icons star" id="star2">star_outline</span>
+                <span class="material-icons star" id="star3">star_outline</span>
+                <span class="material-icons star" id="star4">star_outline</span>
+                <span class="material-icons star" id="star5">star_outline</span>
+            </div><br>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">What did you think of the water fountain?</label>
+                <textarea class="form-control" id="description" rows="3"></textarea>
+            </div>
+            <input class="form-control mt-2" type="file" id="image">
             <button class="btn btn-danger mt-3" id="send">Post</button>
     </div>
 
