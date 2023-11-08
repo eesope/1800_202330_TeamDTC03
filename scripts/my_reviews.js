@@ -27,9 +27,6 @@ function addReviews() {
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
 }
-
-
-
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
@@ -71,7 +68,7 @@ function displayCardsDynamically(collection) {
         })
 }
 
-addReviews(); //calling the function
+// addReviews(); //calling the function
 
 displayCardsDynamically("my_reviews");  //input param is the name of the collection
 
