@@ -27,9 +27,6 @@ function addReviews() {
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
 }
-
-
-
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
