@@ -60,10 +60,13 @@
                     class="material-symbols-outlined">arrow_back</span></button>
         </div>
         <div class="card-body">
-            <h1 class="display-4">Hi, User<span id="name-goes-here"></span></h1>
-            <p class="card-text">You have saved X
+            <h1 class="display-4">Hi, <span id="name-goes-here"></span></h1>
+            <p class="card-text">You have saved <span id="countValue">0</span>
                 plastic bottles with VanWater!</p>
+            <button class="btn btn-success btn-lg" onclick="refill()">Log Refill</button>
         </div>
+        <br>
+        <br>
         <div class="list-group">
             <a class="btn btn-secondary btn-lg justify-content-center" href="account_info.html" role="button">Account
                 Info</a>
@@ -71,6 +74,7 @@
             <a class="btn btn-secondary btn-lg justify-content-center" href="my_reviews.html" role="button">My
                 reviews</a>
         </div>
+
         <div class="logout d-flex justify-content-center mt-5">
             <button class="btn btn-primary btn-lg" href="#" role="button">Log out</button>
         </div>
