@@ -69,3 +69,12 @@
 .get-directions {
     margin-bottom: 120px;
 }
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    color: white;
+}
