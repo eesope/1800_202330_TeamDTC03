@@ -10,7 +10,7 @@ function writeWaters() {
         location: "plaza",
         in_operation: "spring to fall",
         pet_friendly: "Y", //Y or N
-        geom: {"coordinates":[-123.02723857691211,49.235052244781656],"type":"Point"},
+        geom: { "coordinates": [-123.02723857691211, 49.235052244781656], "type": "Point" },
         geo_local_area: "Renfrew-Collingwood",
         geo_point_2d: [49.235052244781656, -123.02723857691211],
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
@@ -24,7 +24,7 @@ function writeWaters() {
         location: "North side of sewage pumping station on w/s/ 1300 Arbutus",
         in_operation: "Year Round",
         pet_friendly: "N", //Y or N
-        geom: {"coordinates":[-123.1527806,49.2737142],"type":"Point"},
+        geom: { "coordinates": [-123.1527806, 49.2737142], "type": "Point" },
         geo_local_area: "Kitsilano",
         geo_point_2d: [49.2737142, -123.1527806],
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
@@ -35,7 +35,7 @@ function writeWaters() {
         location: "Gilford mini park",
         in_operation: "Year Round",
         pet_friendly: "Y", //Y or N
-        geom: {"coordinates":[-123.138092,49.291825],"type":"Point"},
+        geom: { "coordinates": [-123.138092, 49.291825], "type": "Point" },
         geo_local_area: "West End",
         geo_point_2d: [49.291825, -123.138092],
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
@@ -50,7 +50,7 @@ function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection called "Drinking_water_fountains"
-        .then(allWaters=> {
+        .then(allWaters => {
             //var i = 1;  //Optional: if you want to have a unique ID for each location
             allWaters.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
@@ -82,6 +82,6 @@ function displayCardsDynamically(collection) {
         })
 }
 
-writeWaters(); //calling the function
+// writeWaters();
 
 displayCardsDynamically("drinking_water_fountains");  //input param is the name of the collection

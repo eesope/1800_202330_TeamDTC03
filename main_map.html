@@ -65,11 +65,14 @@
                 aria-describedby="inputGroup-sizing-default" placeholder="Search the location...">
         </div>
 
-        <div id="change_view" class="d-flex text-center border border-primary-subtle rounded-3">
-            <div class="p-2 flex-fill bg-primary rounded-3 text-light">List</div>
-            <div class="p-2 flex-fill">Map</div>
+        <div id="change_view" class="d-flex">
+            <a class="btn flex-fill" href="main_list.html" role="button">
+                <div class="p-2 border border-primary-subtle rounded-3">List</div>
+            </a>
+            <a class="btn flex-fill" href="main_map.html" role="button">
+                <div class="p-2 bg-primary rounded-3 text-light">Map</div>
+            </a>
         </div>
-
     </div>
 
     <div class="dropdown">
@@ -106,9 +109,15 @@
     <!-- our own footer goes here-->
     <footer class="navbar justify-content-evenly bg-info fixed-bottom">
         <div id="footer_nav" class="container justify-content-evenly">
-            <p class="d-grid text-center"><i class="material-icons">explore</i> Browse</p>
-            <p class="d-grid text-center"><i class="material-icons">bookmarks</i> Saved</p>
-            <p class="d-grid text-center"><i class="material-icons">person</i> Profile</p>
+            <a class="btn btn-lg justify-content-center" href="main_list.html" role="button">
+                <p class="d-grid text-center"><i class="material-icons">explore</i> Browse</p>
+            </a>
+            <a class="btn btn-lg justify-content-center" href="saved.html" role="button">
+                <p class="d-grid text-center"><i class="material-icons">bookmarks</i> Saved</p>
+            </a>
+            <a class="btn btn-lg justify-content-center" href="profile.html" role="button">
+                <p class="d-grid text-center"><i class="material-icons">person</i> Profile</p>
+            </a>
         </div>
     </footer>
 
