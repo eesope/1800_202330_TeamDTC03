@@ -1,5 +1,3 @@
-// should I seperate it to main_list.js and main_map.js???
-
 function writeWaters() {
     //define a variable for the collection you want to create in Firestore to populate data
     var watersRef = db.collection("drinking_water_fountains");
@@ -63,8 +61,8 @@ function displayCardsDynamically(collection) {
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
-                newcard.querySelector('.card-operation').innerHTML = in_operation;
-                newcard.querySelector('.card-operation').innerHTML = pet_friendly;
+                newcard.querySelector('.card-operation-open').innerHTML = "Operating time: " + in_operation;
+                newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
                 // newcard.querySelector('a').href = "eachWater.html?docID="+docID;

@@ -45,11 +45,13 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
-    
+
     <!-- Load the `mapbox-gl-geocoder` plugin. -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
     <link rel="stylesheet"
-        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+        type="text/css">
 
 </head>
 
@@ -62,18 +64,6 @@
     <!-- the body of your page goes here -->
 
     <div id="top_main">
-        <div id="current_location" class="d-flex">
-            <i id="my_location_icon" class="material-icons">my_location</i>
-            <div>V6B 3H6, Vancouver</div>
-        </div>
-
-        <div id="search_location" class="input-group mb-3">
-            <a href=""><span class="input-group-text" id="inputGroup-sizing-default"><i
-                        class="material-icons">search</i></span></a>
-            <input id="find_location" type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" placeholder="Search the location...">
-        </div>
-
         <div id="change_view" class="d-flex">
             <a class="btn flex-fill" href="main_list.html" role="button">
                 <div class="p-2 border border-primary-subtle rounded-3">List</div>
@@ -82,34 +72,32 @@
                 <div class="p-2 bg-primary rounded-3 text-light">Map</div>
             </a>
         </div>
-    </div>
 
-    <div class="dropdown">
-        Sorted by:
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Distance
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item active" href="#">Distance</a></li>
-            <li><a class="dropdown-item" href="#">Rating</a></li>
-            <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
-        </ul>
-    </div>
+        <div id="current_location" class="d-flex justify-content-between">
+            <div id="user_location" class="d-flex">
+                <i id="my_location_icon" class="material-icons">my_location</i>
+                <div>V6B 3H6, Vancouver</div>
+            </div>
+
+            <div class="dropdown">
+                Sorted by:
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Distance
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item active" href="#">Distance</a></li>
+                    <li><a class="dropdown-item" href="#">Rating</a></li>
+                    <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div id="map_view">
         <!-- Main Body -->
-            <!-- MAPBOX -->
-            <div id='map' style='width: 100%; height: 1000px;'></div>
-            <!-- MAPBOX -->
-            <div>
-                <div class="card">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
-                </div>
-            </div>
+        <!-- MAPBOX -->
+        <div id='map' style='width: 100%; height: 900px;'></div>
     </div>
 
     <!-- our own footer goes here-->
