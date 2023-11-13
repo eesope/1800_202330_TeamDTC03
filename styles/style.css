@@ -93,6 +93,8 @@
 
 .date {
     font-size: 1rem;
+}
+
 .btn-save.clicked {
     background-color: white;
     /* Updated background color when clicked */
