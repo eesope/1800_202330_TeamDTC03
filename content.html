@@ -56,10 +56,19 @@
     <!------------------------------>
 
     <!-- our own navbar goes here -->
-    <nav id="navbarPlaceholder"></nav>
+    <!-- <nav id="navbarPlaceholder"></nav> -->
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
+    <div class="back-btn">
+        <a class="btn back-btn btn-lg" style="background-color: #555" href="main_list.html" role="button"><span
+                class="material-symbols-outlined">arrow_back</span></a>
+    </div>
+    <div class="saved-btn">
+        <button class="btn btn-save" onclick="toggleSave()">
+            <i class="material-icons">favorite</i>
+        </button>
+    </div>
     <div id="carouselExampleIndicators" class="carousel slide mb-1" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -121,9 +130,15 @@
         <!-- our own footer goes here-->
         <footer class="navbar justify-content-evenly bg-info fixed-bottom">
             <div id="footer_nav" class="container justify-content-evenly">
-                <p class="d-grid text-center"><i class="material-icons">explore</i> Browse</p>
-                <p class="d-grid text-center"><i class="material-icons">bookmarks</i> Saved</p>
-                <p class="d-grid text-center"><i class="material-icons">person</i> Profile</p>
+                <a class="btn btn-lg justify-content-center" href="main_list.html" role="button">
+                    <p class="d-grid text-center"><i class="material-icons">explore</i> Browse</p>
+                </a>
+                <a class="btn btn-lg justify-content-center" href="saved.html" role="button">
+                    <p class="d-grid text-center"><i class="material-icons">bookmarks</i> Saved</p>
+                </a>
+                <a class="btn btn-lg justify-content-center" href="profile.html" role="button">
+                    <p class="d-grid text-center"><i class="material-icons">person</i> Profile</p>
+                </a>
             </div>
         </footer>
 
@@ -133,6 +148,10 @@
         <script src="./scripts/firebaseAPI_DTC03.js"></script>
         <script src="./scripts/skeleton.js"></script>
         <!-- <script src="./scripts/script.js"></script> -->
+<<<<<<< HEAD
+=======
+        <script src="./scripts/upload_photo.js"></script>
+>>>>>>> df965a0134469bb3ec9514cd2b8072ca039dc69c
         <script src="./scripts/content.js"></script>
 
 </body>

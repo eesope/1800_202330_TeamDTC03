@@ -35,15 +35,14 @@
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
 
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <!-- Google fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <link rel="stylesheet" href="./styles/style.css">
 
 </head>
 
@@ -53,42 +52,37 @@
     <!------------------------------>
 
     <!-- our own navbar goes here -->
+    <!-- <nav id="navbarPlaceholder"></nav> -->
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-    <div class="back-btn">
-        <button class="btn back-btn btn-lg" style="background-color: #555" href="#" role="button"><span
-                class="material-symbols-outlined">arrow_back</span></button>
-    </div>
-    <div id="list_cards">
-
+    <div class="container">
+        <h1>Saved water fountains</h1>
+        <!-- Here is the container for cards  -->
         <div class="container">
-            <!-- <h1>List of Drinking Water Fountains</h1> -->
-            <!-- Here is the container for cards  -->
-            <div class="container">
-                <div id="drinking_water_fountains-go-here" class="row row-cols-auto">
-                </div>
+            <div id="saved_fountains-go-here" class="row row-cols-auto">
             </div>
         </div>
-
-        <!-- Templates for general use, not displayed -->
-        <template id="waterCardTemplate">
-            <div class="card py-2 mx-2" style="width: 18rem">
-                <img class="card-image card-img-top" src="./images/water_fountain.jpg" alt="..." />
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-operation">placeholder</p>
-                    <br />
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </p>
-                    <a class="btn btn-primary card-href">Read more ...</a>
-                </div>
-            </div>
-        </template>
-
     </div>
+
+    <!-- Templates for general use, not displayed -->
+    <template id="savedReviewTemplate">
+        <div class="card py-2 mx-2" style="width: 18rem">
+            <img class="card-image card-img-top" src=" ..." alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-region">placeholder</p>
+                <p class="card-rating">placeholder</p>
+                <p class="card-comment">
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                </p>
+                <a class="btn btn-primary card-href">Go to this fountain</a>
+            </div>
+        </div>
+    </template>
+
+    </section>
 
     <!-- our own footer goes here-->
     <footer class="navbar justify-content-evenly bg-info fixed-bottom">
@@ -104,6 +98,7 @@
             </a>
         </div>
     </footer>
+
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->

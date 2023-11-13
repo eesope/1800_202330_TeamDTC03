@@ -70,15 +70,18 @@
     margin-bottom: 120px;
 }
 
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+.btn-save {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 1;
+    background-color: red;
+    /* Default background color */
     color: white;
+    /* Default text color */
 }
 
+<<<<<<< HEAD
 .write_review_button {
     text-decoration: none;
     color: white;
@@ -91,4 +94,20 @@
 
 .date {
     font-size: 1rem;
+=======
+.btn-save.clicked {
+    background-color: white;
+    /* Updated background color when clicked */
+    color: red;
+    /* Updated text color when clicked */
+}
+
+.btn-save i {
+    font-size: 24px;
+}
+
+.btn-save i.outline {
+    color: white;
+    /* Change the color to your desired outline color */
+>>>>>>> df965a0134469bb3ec9514cd2b8072ca039dc69c
 }

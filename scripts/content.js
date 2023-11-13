@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 db.collection('reviews').get().then((snapshot) => {
     let first = true;
@@ -23,3 +24,11 @@ function savePost() {
     localStorage.setItem('waterfountainID', ID);
     window.location.href = "writing_reviews.html";
 }
+=======
+function toggleSave() {
+    var btn = document.querySelector('.btn-save');
+
+    // Toggle the 'clicked' class to change the button style
+    btn.classList.toggle('clicked');
+}
+>>>>>>> df965a0134469bb3ec9514cd2b8072ca039dc69c
