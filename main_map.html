@@ -40,8 +40,16 @@
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+
+    <!-- Load Mapbox libraries -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+    
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
 </head>
 
@@ -60,8 +68,9 @@
         </div>
 
         <div id="search_location" class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default"><i class="material-icons">search</i></span>
-            <input type="text" class="form-control" aria-label="Sizing example input"
+            <a href=""><span class="input-group-text" id="inputGroup-sizing-default"><i
+                        class="material-icons">search</i></span></a>
+            <input id="find_location" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" placeholder="Search the location...">
         </div>
 
@@ -90,7 +99,6 @@
 
     <div id="map_view">
         <!-- Main Body -->
-        <main>
             <!-- MAPBOX -->
             <div id='map' style='width: 100%; height: 1000px;'></div>
             <!-- MAPBOX -->
@@ -102,8 +110,6 @@
                     <p class="card-text"></p>
                 </div>
             </div>
-        </main>
-
     </div>
 
     <!-- our own footer goes here-->
