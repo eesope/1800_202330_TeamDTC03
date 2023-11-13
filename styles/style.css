@@ -81,7 +81,6 @@
     /* Default text color */
 }
 
-<<<<<<< HEAD
 .write_review_button {
     text-decoration: none;
     color: white;
@@ -94,7 +93,6 @@
 
 .date {
     font-size: 1rem;
-=======
 .btn-save.clicked {
     background-color: white;
     /* Updated background color when clicked */
@@ -109,5 +107,4 @@
 .btn-save i.outline {
     color: white;
     /* Change the color to your desired outline color */
->>>>>>> df965a0134469bb3ec9514cd2b8072ca039dc69c
 }
