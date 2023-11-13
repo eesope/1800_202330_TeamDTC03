@@ -11,10 +11,15 @@
     font-family: 'Young Serif', serif;
 }
 
+.current_location {
+    padding-bottom: 10px;
+    /* not showing padding because of the map height */
+}
+
 .container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px; */
 }
 
 .container img {
