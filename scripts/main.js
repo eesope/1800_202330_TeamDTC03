@@ -83,5 +83,6 @@ function displayCardsDynamically(collection) {
 }
 
 // writeWaters();
-
 displayCardsDynamically("drinking_water_fountains");  //input param is the name of the collection
+
+
