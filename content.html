@@ -92,31 +92,19 @@
         </button>
     </div>
     <div class="d-grid gap-2">
-        <label for="mypic-input" class="btn btn-primary btn-block btn-outlined">Add a Photo +</label>
-        <input id="mypic-input" style="visibility:hidden;" type="file">
+        <button class="btn btn-primary btn-block btn-outlined"><a class="write_review_button"
+                href="./writing_reviews.html">Write Review</button>
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-center">
-        <img id="mypic-goes-here" width=100 height=100 />
-        <button type="button" class="btn btn-info btn-line-height" onclick="savePost()">Post Now</button>
-    </div>
+
     <div class="overflow-auto">
         <div class="info">
             <div>
                 <h3>Water fountain #1</h3>
             </div>
-            <div class="bg-info mb-2">
-                <h5> Review</h5>
-                <div class="containers">
-                    <div><img src="./images/puppy_one.jpg" alt="puppy_one" width="70px">Kevin
-                        <span>★★★★★</span>
-                    </div>
-                </div>
-                <div>My puppy loves this water fountain! Very clean and pet friendly!</div>
-            </div>
+
+            <div class="container-fluid reviewing bg-light mt-3">Review</div>
+
             <div>
-                <button type="button" class="btn bg-warning btn-line-height container-fluid">
-                    <a href="writing_reviews.html">Write a review
-                    </a></button>
                 <div class="container mt-3"></div>
                 <div class="water-quality-table">
                     <h4>Water quality</h4>
@@ -145,7 +133,7 @@
         <script src="./scripts/firebaseAPI_DTC03.js"></script>
         <script src="./scripts/skeleton.js"></script>
         <!-- <script src="./scripts/script.js"></script> -->
-        <script src="./scripts/upload_photo.js"></script>
+        <script src="./scripts/content.js"></script>
 
 </body>
 

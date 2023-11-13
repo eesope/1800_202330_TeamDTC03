@@ -78,3 +78,17 @@
         'opsz' 24;
     color: white;
 }
+
+.write_review_button {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+}
+
+.reviewing {
+    color: black;
+}
+
+.date {
+    font-size: 1rem;
+}
