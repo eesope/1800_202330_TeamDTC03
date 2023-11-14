@@ -1,8 +1,8 @@
 $('#send').click(function(){
     // var file = document.querySelector('#image').files[0];
     // var storageRef = storage.ref();
-    // var 저장할경로 = storageRef.child('image/' + '파일명');
-    // var 업로드작업 = 저장할경로.put(file)
+    // var water_fountain_images = storageRef.child('image/' + file.name);
+    // var uploaded_image = water_fountain_images.put(file)
 
     var review_info = {
         title: $('#title').val(),
