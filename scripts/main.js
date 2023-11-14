@@ -56,7 +56,7 @@ function displayCardsDynamically(collection) {
                 // var waterCode = doc.data().mapid;    //get unique ID to each hike to be used for fetching right image
                 var pet_friendly = doc.data().pet_friendly;
                 var in_operation = doc.data().in_operation;
-                // var docID = doc.id;
+                var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
@@ -65,7 +65,7 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
-                // newcard.querySelector('a').href = "eachWater.html?docID="+docID;
+                newcard.querySelector('a').href = "content.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);

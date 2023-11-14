@@ -1,4 +1,3 @@
-
 db.collection('reviews').get().then((snapshot) => {
     let first = true;
     snapshot.forEach((doc) => {
@@ -28,4 +27,10 @@ function toggleSave() {
 
     // Toggle the 'clicked' class to change the button style
     btn.classList.toggle('clicked');
+}
+
+function displayWaterInfo() {
+    let params = new URL(window.location.href); //get url of search bar
+    let ID = params.searchParams.get("docID"); //get value for key "docID"
+    console.log(ID)
 }
