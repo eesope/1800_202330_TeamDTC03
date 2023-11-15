@@ -17,7 +17,7 @@ function populateUserInfo() {
                     if (userName != null) {
                         document.getElementById("nameInput").value = userName;
                     }
-                    if (userSchool != null) {
+                    if (userVolume != null) {
                         document.getElementById("volumeInput").value = userVolume;
                     }
                 })
@@ -53,4 +53,5 @@ function saveUserInfo() {
 
     //c) disable edit 
     document.getElementById('personalInfoFields').disabled = true;
+    console.log("User info saved");
 }
