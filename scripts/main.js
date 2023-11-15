@@ -1,6 +1,6 @@
-function writeWaters() {
+// function writeWaters() {
     //define a variable for the collection you want to create in Firestore to populate data
-    var watersRef = db.collection("drinking_water_fountains");
+    // var watersRef = db.collection("drinking_water_fountains");
 
 //     watersRef.add({
 //         mapid: "DFPB0001",
