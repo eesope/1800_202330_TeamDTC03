@@ -99,7 +99,7 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
-                // newcard.querySelector('a').href = "eachWater.html?docID="+docID;
+                newcard.querySelector('a').href = "content.html?docID=" + docID;
                 newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
                 newcard.querySelector('i').onclick = () => updateBookmark(docID);
 
@@ -116,7 +116,6 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
-                //attach to gallery, Example: "hikes-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
@@ -149,7 +148,6 @@ function updateBookmark(fountainDocID) {
 
     });
 }
-
 
 
 
