@@ -1,45 +1,78 @@
-// function writeWaters() {
+function doAll() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid); //global
+            console.log(currentUser);
+
+            insertNameFromFirestore();
+            // the following functions are always called when someone is logged in
+            displayCardsDynamically("drinking_water_fountains");  //display all water fountains
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+            window.location.href = "login.html";
+        }
+    });
+}
+doAll();
+
+function insertNameFromFirestore() {
+    // Check if the user is logged in:
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            console.log(user.uid); // Let's know who the logged-in user is by logging their UID
+            currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
+            currentUser.get().then(userDoc => {
+                // Get the user name
+                var userName = userDoc.data().name;
+            })
+        } else {
+            console.log("No user is logged in."); // Log a message when no user is logged in
+        }
+    })
+}
+
+function writeWaters() {
     //define a variable for the collection you want to create in Firestore to populate data
-    // var watersRef = db.collection("drinking_water_fountains");
+    var watersRef = db.collection("drinking_water_fountains");
 
-//     watersRef.add({
-//         mapid: "DFPB0001",
-//         name: "Fountain location: Aberdeen Park",
-//         location: "plaza",
-//         in_operation: "spring to fall",
-//         pet_friendly: "Y", //Y or N
-//         geom: { "coordinates": [-123.02723857691211, 49.235052244781656], "type": "Point" },
-//         geo_local_area: "Renfrew-Collingwood",
-//         geo_point_2d: [49.235052244781656, -123.02723857691211],
-//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-//     });
+    watersRef.add({
+        mapid: "DFPB0001",
+        name: "Fountain location: Aberdeen Park",
+        location: "plaza",
+        in_operation: "spring to fall",
+        pet_friendly: "Y", //Y or N
+        geom: { "coordinates": [-123.02723857691211, 49.235052244781656], "type": "Point" },
+        geo_local_area: "Renfrew-Collingwood",
+        geo_point_2d: [49.235052244781656, -123.02723857691211],
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
 
-//     watersRef.add({
-//         mapid: "DFENG0504",
-//         name: "Bottle Filling Station location: Kitsilano Pumping Station",
-//         location: "North side of sewage pumping station on w/s/ 1300 Arbutus",
-//         in_operation: "Year Round",
-//         pet_friendly: "N", //Y or N
-//         geom: { "coordinates": [-123.1527806, 49.2737142], "type": "Point" },
-//         geo_local_area: "Kitsilano",
-//         geo_point_2d: [49.2737142, -123.1527806],
-//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-//     });
-//     watersRef.add({
-//         mapid: "DFENG0053",
-//         name: "Fountain location: Gilford St & Haro St",
-//         location: "Gilford mini park",
-//         in_operation: "Year Round",
-//         pet_friendly: "Y", //Y or N
-//         geom: { "coordinates": [-123.138092, 49.291825], "type": "Point" },
-//         geo_local_area: "West End",
-//         geo_point_2d: [49.291825, -123.138092],
-//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-//     });
-// }
+    console.log("write called")
 
-// calling api from public api
-
+    watersRef.add({
+        mapid: "DFENG0504",
+        name: "Bottle Filling Station location: Kitsilano Pumping Station",
+        location: "North side of sewage pumping station on w/s/ 1300 Arbutus",
+        in_operation: "Year Round",
+        pet_friendly: "N", //Y or N
+        geom: { "coordinates": [-123.1527806, 49.2737142], "type": "Point" },
+        geo_local_area: "Kitsilano",
+        geo_point_2d: [49.2737142, -123.1527806],
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+    watersRef.add({
+        mapid: "DFENG0053",
+        name: "Fountain location: Gilford St & Haro St",
+        location: "Gilford mini park",
+        in_operation: "Year Round",
+        pet_friendly: "Y", //Y or N
+        geom: { "coordinates": [-123.138092, 49.291825], "type": "Point" },
+        geo_local_area: "West End",
+        geo_point_2d: [49.291825, -123.138092],
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+}
 
 
 //------------------------------------------------------------------------------
@@ -66,7 +99,7 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
-                // newcard.querySelector('a').href = "eachWater.html?docID="+docID;
+                newcard.querySelector('a').href = "content.html?docID=" + docID;
                 newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
                 newcard.querySelector('i').onclick = () => updateBookmark(docID);
 
@@ -83,7 +116,6 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
-                //attach to gallery, Example: "hikes-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
@@ -116,7 +148,6 @@ function updateBookmark(fountainDocID) {
 
     });
 }
-
 
 
 

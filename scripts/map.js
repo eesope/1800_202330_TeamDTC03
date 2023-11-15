@@ -14,11 +14,13 @@ function showMap() {
   var nav = new mapboxgl.NavigationControl();
   map.addControl(nav, 'top-left');
 
+
   //------------------------------------
   // Listen for when map finishes loading
   // then Add map features 
   //------------------------------------
   map.on('load', () => {
+
     // Defines map pin icon for events
     map.loadImage(
       'https://cdn.iconscout.com/icon/free/png-256/pin-locate-marker-location-navigation-16-28668.png',
@@ -43,8 +45,10 @@ function showMap() {
             preview = doc.data().location; // Text Preview
             operation = doc.data().in_operation;
             // img = doc.data().posterurl; // Image
+            // url = doc.data().link; // URL
 
             // Pushes information into the features array
+            // in our application, we have a string description of the hike
             features.push({
               'type': 'Feature',
               'properties': {
@@ -129,7 +133,7 @@ function showMap() {
         // Adds user's current location as a source to the map
         navigator.geolocation.getCurrentPosition(position => {
           const userLocation = [position.coords.longitude, position.coords.latitude];
-          console.log("1. user position" + userLocation);
+          console.log(userLocation);
           if (userLocation) {
             map.addSource('userLocation', {
               'type': 'geojson',
@@ -197,7 +201,7 @@ function showMap() {
   // Get the user's location
   navigator.geolocation.getCurrentPosition(function (position) {
     userLocation = [position.coords.longitude, position.coords.latitude];
-    console.log("2. user location: " + userLocation);
+    console.log(userLocation);
     console.log(searchLocation);
 
     // Add a marker to the map at the user's location
