@@ -116,7 +116,6 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
-                //attach to gallery, Example: "hikes-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
@@ -149,7 +148,6 @@ function updateBookmark(fountainDocID) {
 
     });
 }
-
 
 
 
