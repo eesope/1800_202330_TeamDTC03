@@ -1,44 +1,45 @@
-function writeWaters() {
-    //define a variable for the collection you want to create in Firestore to populate data
-    var watersRef = db.collection("drinking_water_fountains");
+// function writeWaters() {
+//     //define a variable for the collection you want to create in Firestore to populate data
+//     var watersRef = db.collection("drinking_water_fountains");
 
-    watersRef.add({
-        mapid: "DFPB0001",
-        name: "Fountain location: Aberdeen Park",
-        location: "plaza",
-        in_operation: "spring to fall",
-        pet_friendly: "Y", //Y or N
-        geom: { "coordinates": [-123.02723857691211, 49.235052244781656], "type": "Point" },
-        geo_local_area: "Renfrew-Collingwood",
-        geo_point_2d: [49.235052244781656, -123.02723857691211],
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
+//     watersRef.add({
+//         mapid: "DFPB0001",
+//         name: "Fountain location: Aberdeen Park",
+//         location: "plaza",
+//         in_operation: "spring to fall",
+//         pet_friendly: "Y", //Y or N
+//         geom: { "coordinates": [-123.02723857691211, 49.235052244781656], "type": "Point" },
+//         geo_local_area: "Renfrew-Collingwood",
+//         geo_point_2d: [49.235052244781656, -123.02723857691211],
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+//     });
 
-    console.log("write called")
+//     watersRef.add({
+//         mapid: "DFENG0504",
+//         name: "Bottle Filling Station location: Kitsilano Pumping Station",
+//         location: "North side of sewage pumping station on w/s/ 1300 Arbutus",
+//         in_operation: "Year Round",
+//         pet_friendly: "N", //Y or N
+//         geom: { "coordinates": [-123.1527806, 49.2737142], "type": "Point" },
+//         geo_local_area: "Kitsilano",
+//         geo_point_2d: [49.2737142, -123.1527806],
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+//     });
+//     watersRef.add({
+//         mapid: "DFENG0053",
+//         name: "Fountain location: Gilford St & Haro St",
+//         location: "Gilford mini park",
+//         in_operation: "Year Round",
+//         pet_friendly: "Y", //Y or N
+//         geom: { "coordinates": [-123.138092, 49.291825], "type": "Point" },
+//         geo_local_area: "West End",
+//         geo_point_2d: [49.291825, -123.138092],
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+//     });
+// }
 
-    watersRef.add({
-        mapid: "DFENG0504",
-        name: "Bottle Filling Station location: Kitsilano Pumping Station",
-        location: "North side of sewage pumping station on w/s/ 1300 Arbutus",
-        in_operation: "Year Round",
-        pet_friendly: "N", //Y or N
-        geom: { "coordinates": [-123.1527806, 49.2737142], "type": "Point" },
-        geo_local_area: "Kitsilano",
-        geo_point_2d: [49.2737142, -123.1527806],
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
-    watersRef.add({
-        mapid: "DFENG0053",
-        name: "Fountain location: Gilford St & Haro St",
-        location: "Gilford mini park",
-        in_operation: "Year Round",
-        pet_friendly: "Y", //Y or N
-        geom: { "coordinates": [-123.138092, 49.291825], "type": "Point" },
-        geo_local_area: "West End",
-        geo_point_2d: [49.291825, -123.138092],
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
-}
+// calling api from public api
+
 
 
 //------------------------------------------------------------------------------
