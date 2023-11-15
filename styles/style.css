@@ -107,7 +107,6 @@ a {
 
 .date {
     font-size: 1rem;
-<<<<<<< HEAD
 }
 
 .btn-save.clicked {
@@ -115,24 +114,6 @@ a {
     /* Updated background color when clicked */
     color: red;
     /* Updated text color when clicked */
-=======
-
-    .btn-save.clicked {
-        background-color: white;
-        /* Updated background color when clicked */
-        color: red;
-        /* Updated text color when clicked */
-    }
-
-    .btn-save i {
-        font-size: 24px;
-    }
-
-    .btn-save i.outline {
-        color: white;
-        /* Change the color to your desired outline color */
-    }
->>>>>>> 4f1a951d385714614809ae9bd4b8ce7db4ad5c28
 }
 
 h3,
