@@ -43,7 +43,7 @@ function getBookmarks(user) {
             // Get pointer the new card template
             let newcardTemplate = document.getElementById("savedFountainTemplate");
 
-            // Iterate through the ARRAY of bookmarked hikes (document ID's)
+            // Iterate through the ARRAY of bookmarked fountains (document ID's)
             bookmarks.forEach(thisFountainID => {
                 console.log(thisFountainID);
                 db.collection("drinking_water_fountains").doc(thisFountainID).get().then(doc => {
@@ -64,7 +64,7 @@ function getBookmarks(user) {
                     newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
 
                     //Finally, attach this new card to the gallery
-                    hikeCardGroup.appendChild(newcard);
+                    fountainCardGroup.appendChild(newcard);
                 })
             });
         })
