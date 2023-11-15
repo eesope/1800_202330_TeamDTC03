@@ -103,13 +103,13 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
                 newcard.querySelector('i').onclick = () => updateBookmark(docID);
 
-                // currentUser.get().then(userDoc => {
-                //     //get the user name
-                //     var bookmarks = userDoc.data().bookmarks;
-                //     if (bookmarks.includes(docID)) {
-                //         document.getElementById('save-' + docID).innerText = 'bookmark';
-                //     }
-                // })
+                currentUser.get().then(userDoc => {
+                    //get the user name
+                    var bookmarks = userDoc.data().bookmarks;
+                    if (bookmarks.includes(docID)) {
+                        document.getElementById('save-' + docID).innerText = 'bookmark';
+                    }
+                })
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
