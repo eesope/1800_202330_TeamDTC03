@@ -1,3 +1,37 @@
+function doAll() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid); //global
+            console.log(currentUser);
+
+            insertNameFromFirestore();
+            // the following functions are always called when someone is logged in
+            displayCardsDynamically("drinking_water_fountains");  //display all water fountains
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+            window.location.href = "login.html";
+        }
+    });
+}
+doAll();
+
+function insertNameFromFirestore() {
+    // Check if the user is logged in:
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            console.log(user.uid); // Let's know who the logged-in user is by logging their UID
+            currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
+            currentUser.get().then(userDoc => {
+                // Get the user name
+                var userName = userDoc.data().name;
+            })
+        } else {
+            console.log("No user is logged in."); // Log a message when no user is logged in
+        }
+    })
+}
+
 function writeWaters() {
     //define a variable for the collection you want to create in Firestore to populate data
     var watersRef = db.collection("drinking_water_fountains");
@@ -56,7 +90,7 @@ function displayCardsDynamically(collection) {
                 // var waterCode = doc.data().mapid;    //get unique ID to each hike to be used for fetching right image
                 var pet_friendly = doc.data().pet_friendly;
                 var in_operation = doc.data().in_operation;
-                // var docID = doc.id;
+                var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
@@ -66,6 +100,16 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
                 // newcard.querySelector('a').href = "eachWater.html?docID="+docID;
+                newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
+                newcard.querySelector('i').onclick = () => updateBookmark(docID);
+
+                // currentUser.get().then(userDoc => {
+                //     //get the user name
+                //     var bookmarks = userDoc.data().bookmarks;
+                //     if (bookmarks.includes(docID)) {
+                //         document.getElementById('save-' + docID).innerText = 'bookmark';
+                //     }
+                // })
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
@@ -81,6 +125,32 @@ function displayCardsDynamically(collection) {
 }
 
 // writeWaters();
-displayCardsDynamically("drinking_water_fountains");  //input param is the name of the collection
+// displayCardsDynamically("drinking_water_fountains");  
+
+function updateBookmark(fountainDocID) {
+    currentUser.get().then(userDoc => {
+        let bookmarks = userDoc.data().bookmarks;
+        let iconID = "save-" + fountainDocID;
+        let isBookmarked = bookmarks.includes(fountainDocID);
+
+        if (isBookmarked) {
+            currentUser.update({
+                bookmarks: firebase.firestore.FieldValue.arrayRemove(fountainDocID)
+            }).then(() => {
+                document.getElementById(iconID).innerText = 'bookmark_border';
+            })
+        } else {
+            currentUser.update({
+                bookmarks: firebase.firestore.FieldValue.arrayUnion(fountainDocID)
+            }).then(() => {
+                document.getElementById(iconID).innerText = 'bookmark';
+            })
+        }
+
+    });
+}
+
+
+
 
 
