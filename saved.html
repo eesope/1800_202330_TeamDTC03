@@ -57,27 +57,25 @@
     <!-- the body of your page goes here -->
     <!-- stuff -->
     <div class="container">
-        <h1>Saved water fountains</h1>
-        <!-- Here is the container for cards  -->
+        <h1>Saved fountains for <span id=name-goes-here></span></h1>
+        <!-- Here is container for cards  -->
         <div class="container">
-            <div id="saved_fountains-go-here" class="row row-cols-auto">
+            <div id="fountainCardGroup" class="row row-cols-auto">
             </div>
         </div>
     </div>
 
     <!-- Templates for general use, not displayed -->
-    <template id="savedReviewTemplate">
-        <div class="card py-2 mx-2" style="width: 18rem">
-            <img class="card-image card-img-top" src=" ..." alt="..." />
+    <template id="savedFountainTemplate">
+        <div class="card py-1 mx-1" style="width: 90%">
+            <img class="card-image card-img-top" src="./images/water_fountain.jpg" alt="photo of drinking water fountain" />
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-region">placeholder</p>
-                <p class="card-rating">placeholder</p>
-                <p class="card-comment">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                <p class="card-operation-open">placeholder</p>
+                <p class="card-operation-pet">placeholder</p>
+                <p class="card-text">
                 </p>
-                <a class="btn btn-primary card-href">Go to this fountain</a>
+                <a class="btn btn-primary card-href">See more</a>
             </div>
         </div>
     </template>

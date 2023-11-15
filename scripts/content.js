@@ -18,16 +18,6 @@ db.collection('reviews').get().then((snapshot) => {
     })
 
 })
-function savePost() {
-    localStorage.setItem('waterfountainID', ID);
-    window.location.href = "writing_reviews.html";
-}
-function toggleSave() {
-    var btn = document.querySelector('.btn-save');
-
-    // Toggle the 'clicked' class to change the button style
-    btn.classList.toggle('clicked');
-}
 
 function displayWaterInfo() {
     let params = new URL(window.location.href); //get url of search bar

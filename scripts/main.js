@@ -1,6 +1,6 @@
-// function writeWaters() {
-//     //define a variable for the collection you want to create in Firestore to populate data
-//     var watersRef = db.collection("drinking_water_fountains");
+function writeWaters() {
+    //define a variable for the collection you want to create in Firestore to populate data
+    var watersRef = db.collection("drinking_water_fountains");
 
 //     watersRef.add({
 //         mapid: "DFPB0001",
@@ -66,7 +66,17 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
-                newcard.querySelector('a').href = "content.html?docID=" + docID;
+                // newcard.querySelector('a').href = "eachWater.html?docID="+docID;
+                newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
+                newcard.querySelector('i').onclick = () => updateBookmark(docID);
+
+                currentUser.get().then(userDoc => {
+                    //get the user name
+                    var bookmarks = userDoc.data().bookmarks;
+                    if (bookmarks.includes(docID)) {
+                        document.getElementById('save-' + docID).innerText = 'bookmark';
+                    }
+                })
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
@@ -82,6 +92,32 @@ function displayCardsDynamically(collection) {
 }
 
 // writeWaters();
-displayCardsDynamically("drinking_water_fountains");  //input param is the name of the collection
+// displayCardsDynamically("drinking_water_fountains");  
+
+function updateBookmark(fountainDocID) {
+    currentUser.get().then(userDoc => {
+        let bookmarks = userDoc.data().bookmarks;
+        let iconID = "save-" + fountainDocID;
+        let isBookmarked = bookmarks.includes(fountainDocID);
+
+        if (isBookmarked) {
+            currentUser.update({
+                bookmarks: firebase.firestore.FieldValue.arrayRemove(fountainDocID)
+            }).then(() => {
+                document.getElementById(iconID).innerText = 'bookmark_border';
+            })
+        } else {
+            currentUser.update({
+                bookmarks: firebase.firestore.FieldValue.arrayUnion(fountainDocID)
+            }).then(() => {
+                document.getElementById(iconID).innerText = 'bookmark';
+            })
+        }
+
+    });
+}
+
+
+
 
 

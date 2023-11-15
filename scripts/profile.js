@@ -1,3 +1,21 @@
+function doAll() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid); //global
+            console.log(currentUser);
+            getNameFromAuth()
+            insertNameFromFirestore();
+            // the following functions are always called when someone is logged in
+            getBottleCount(user);
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+            window.location.href = "login.html";
+        }
+    });
+}
+doAll();
+
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -21,7 +39,7 @@ function getNameFromAuth() {
         }
     });
 }
-getNameFromAuth(); //run the function
+// getNameFromAuth(); //run the function
 
 function insertNameFromFirestore() {
     // Check if the user is logged in:
@@ -43,15 +61,66 @@ function insertNameFromFirestore() {
     })
 }
 
-insertNameFromFirestore();
+// insertNameFromFirestore();
+
+
 
 let bottleCount = 0;
 
-// Function to update count and display
+// Function to update the display with the bottle count
+function updateCountDisplay(count) {
+    document.getElementById('countValue').innerText = count;
+}
+
+// Function to increase count
 function refill() {
     // Increment the count
     bottleCount++;
 
     // Update the display
-    document.getElementById('countValue').innerText = bottleCount;
+    updateCountDisplay(bottleCount);
+
+    // Save the updated bottle count to Firestore
+    saveBottleCount();
 }
+
+// Function to decrease count
+function undo() {
+    // Decrement the count
+    bottleCount--;
+
+    // Update the display
+    updateCountDisplay(bottleCount);
+
+    // Save the updated bottle count to Firestore
+    saveBottleCount();
+}
+
+// Function to save bottle count in Firestore
+function saveBottleCount() {
+    // Get the updated bottle count
+    const bottleCountSaved = bottleCount;
+
+    // Update the 'countValue' field in the user's Firestore document
+    currentUser.update({
+        countValue: bottleCountSaved
+    }).then(function () {
+        console.log("Bottle count updated in Firestore");
+    }).catch(function (error) {
+        console.error("Error updating bottle count: ", error);
+    });
+}
+
+
+function getBottleCount(user) {
+    db.collection("users").doc(user.uid).get()
+        .then(userDoc => {
+            // Get the bottle count
+            bottleCount = userDoc.data().countValue;
+
+            // Update the display
+            updateCountDisplay(bottleCount);
+        }
+        );
+}
+
