@@ -9,23 +9,22 @@ async function writeJSONdata() {
     var watersRef = db.collection("drinking_fountains");
 
     for (x of drinkingFountains) {
-        title = x.name
+        mapid = x.mapid;
+        title = x.name;
         in_operation = x.in_operation;
         pet_friendly = x.pet_friendly;
         geo_point = x.geo_point_2d;
         area = x.geo_local_area;
 
         watersRef.add({
-            title: "title",
-            in_operation: "in_operation",
-            pet_friendly: "pet_friendly",
-            geo_point: "geo_point",
-            area: "area"
+            mapid: mapid,
+            title: title,
+            in_operation: in_operation,
+            pet_friendly: pet_friendly,
+            geo_point: geo_point,
+            area: area
         });
     }
-
-    console.log(drinkingFountains)
-    console.log("test", title)
 }
 
-writeJSONdata()
+// writeJSONdata();
