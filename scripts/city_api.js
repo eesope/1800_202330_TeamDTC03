@@ -1,19 +1,31 @@
+console.log("city api called")
+
 async function writeJSONdata() {
 
-    // var watersRef = db.collection("drinking_fountains");
-    // watersRef.add({});
-
-    console.log("writeJSONdata called")
-
-    const response = await fetch("./data/drinking-fountains.json")
+    const response = await fetch("./data/drinking-fountains.json");
     const data = await response.text(); //get string file
-    const drinking_fountains = JSON.parse(data); // convert to JSON
+    const drinkingFountains = JSON.parse(data); // convert to JSON
 
-    for (x of drinking_fountains) {
-        let title = x.name
-        let in_operation = x.in_operation;
-        let pet_friendly = x.pet_friendly;
-        let geo_point = x.geo_point_2d;
-        let area = x.geo_local_area;
+    var watersRef = db.collection("drinking_fountains");
+
+    for (x of drinkingFountains) {
+        title = x.name
+        in_operation = x.in_operation;
+        pet_friendly = x.pet_friendly;
+        geo_point = x.geo_point_2d;
+        area = x.geo_local_area;
+
+        watersRef.add({
+            title: "title",
+            in_operation: "in_operation",
+            pet_friendly: "pet_friendly",
+            geo_point: "geo_point",
+            area: "area"
+        });
     }
+
+    console.log(drinkingFountains)
+    console.log("test", title)
 }
+
+writeJSONdata()
