@@ -1,5 +1,3 @@
-console.log("city api called")
-
 async function writeJSONdata() {
 
     const response = await fetch("./data/drinking-fountains.json");
