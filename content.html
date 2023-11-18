@@ -96,8 +96,8 @@
         </button>
     </div>
     <div class="d-grid gap-2">
-        <button class="btn btn-primary btn-block btn-outlined"><a class="write_review_button"
-                href="./writing_reviews.html">Write Review</button>
+        <button class="btn btn-primary mb-3" onclick="saveWaterFountainDocumentIDAndRedirect()">Write
+            Review</button>
     </div>
 
     <div class="overflow-auto">
@@ -107,7 +107,31 @@
                 <h3>Water fountain #1</h3>
             </div>
 
-            <div class="container-fluid reviewing bg-light mt-3">Review</div>
+            <div class="container">
+                <h2>Reviews:</h2>
+                <div id="details-go-here"></div>
+                <!-- Here is the container for cards with horizontal scrolling -->
+                <div class="card-container">
+                    <div id="reviewCardGroup" class="row row-cols-auto">
+                        <!-- Add your card templates here -->
+                    </div>
+                </div>
+            </div>
+
+            <template id="reviewCardTemplate">
+                <div class="card bg-secondary">
+                    <img class="card-img-top">
+                    <div class="card-body bg-light">
+                        <h5 class="title">placeholder</h5>
+                        <p class="star-rating"></p>
+                        <p class="time">placeholder</p>
+                        <br>
+                        <p class="description">This card has supporting text below as a natural lead-in to additional
+                            content.
+                        </p>
+                    </div>
+                </div>
+            </template>
 
             <div>
                 <div class="container mt-3"></div>

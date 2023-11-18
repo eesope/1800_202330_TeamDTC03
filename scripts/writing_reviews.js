@@ -1,3 +1,14 @@
+var water_fountainID = localStorage.getItem('water_fountainID');
+
+function displayWater_fountainName() {
+    db.collection('drinking_fountains').doc(water_fountainID).get().then( (thisWater_fountain)=>{
+        water_fountainName = thisWater_fountain.data().title;
+        document.getElementById("water_fountain_Name").innerHTML = water_fountainName;
+    })
+
+}
+displayWater_fountainName()
+
 var ImageFile;
 function listenFileSelect() {
     // listen for file selection
@@ -139,3 +150,46 @@ stars.forEach((star, index) => {
         }
     });
 });
+
+function savePost() {
+    console.log("inside write review");
+    let water_fountain_Title = document.getElementById("title").value;
+    let water_fountain_Description = document.getElementById("description").value;
+
+    // Get the star rating
+    // Get all the elements with the class "star" and store them in the 'stars' variable
+    const stars = document.querySelectorAll('.star');
+    // Initialize a variable 'hikeRating' to keep track of the rating count
+    let water_fountain_Rating = 0;
+    // Iterate through each element in the 'stars' NodeList using the forEach method
+    stars.forEach((star) => {
+        // Check if the text content of the current 'star' element is equal to the string 'star'
+        if (star.textContent === 'star') {
+            // If the condition is met, increment the 'hikeRating' by 1
+            water_fountain_Rating++;
+        }
+    });
+
+    console.log(water_fountain_Title, water_fountain_Description, water_fountain_Rating);
+
+    var user = firebase.auth().currentUser;
+    if (user) {
+        var currentUser = db.collection("users").doc(user.uid);
+        var userID = user.uid;
+
+        // Get the document for the current user.
+        db.collection("reviews").add({
+            water_fountain_DocID: water_fountainID,
+            userID: userID,
+            title: water_fountain_Title,
+            description: water_fountain_Description,
+            rating: water_fountain_Rating, // Include the rating in the review
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            window.location.href = "thanks.html"; // Redirect to the thanks page
+        });
+    } else {
+        console.log("No user is signed in");
+        window.location.href = 'writing_reviews.html';
+    }
+}

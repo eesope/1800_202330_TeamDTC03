@@ -96,12 +96,6 @@ a {
     /* Default text color */
 }
 
-.write_review_button {
-    text-decoration: none;
-    color: white;
-    font-size: 25px;
-}
-
 .reviewing {
     color: black;
 }
