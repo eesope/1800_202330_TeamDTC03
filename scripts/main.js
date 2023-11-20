@@ -37,9 +37,16 @@ function insertNameFromFirestore() {
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
 
+    let count = 0; //to show only limited locations
+
     db.collection(collection).get()   //the collection called "Drinking_water_fountains"
         .then(allWaters => {
             allWaters.forEach(doc => {
+
+                if (count >= 5) {
+                    return;
+                }
+
                 var title = doc.data().name;
                 var details = doc.data().location;
                 var petFriendly = doc.data().pet_friendly;
@@ -59,12 +66,12 @@ function displayCardsDynamically(collection) {
 
                     // Conditionally set the image source based on maintainer
                     if (maintainer == "parks") {
-                        newcard.querySelector('.card-image').src = "http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/" + fountainImg;
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
                     } else if (maintainer == "Engineering") {
-                        newcard.querySelector('.card-image').src = "http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/" + fountainImg;
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
                     }
                 }
-                newcard.querySelector('a').href = "content.html?docID=" + docID;
+                newcard.querySelector('a').href = 'content.html?docID=' + docID;
 
                 newcard.querySelector('i').id = 'save-' + docID; // for assigning unique id to each save button
                 newcard.querySelector('i').onclick = () => updateBookmark(docID);
@@ -83,10 +90,12 @@ function displayCardsDynamically(collection) {
                     }
                 })
                 document.getElementById(collection + "-go-here").appendChild(newcard);
+
+                count++;
             })
         })
         .catch(error => {
-            console.error("Error displaying cards:", error);
+            console.error('Error displaying cards:', error);
         });
 }
 

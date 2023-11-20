@@ -3,10 +3,11 @@ function showMap() {
   // Defines and initiates basic mapbox data
   //------------------------------------------
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
-  const map = new mapboxgl.Map({
+
+  const map = new mapboxgl.Map({ // define mapbox data
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
-    center: [123.1207, 49.2827], // Starting position [lng, lat]
+    center: [-123.1207, 49.2827], // Starting position [lng, lat]
     zoom: 2 // Starting zoom
   });
 
@@ -30,32 +31,38 @@ function showMap() {
         // Add the image to the map style.
         map.addImage('eventpin', image); // Pin Icon
 
+        let count = 0;
+
         // READING information from "hikes" collection in Firestore
-        db.collection('drinking_water_fountains').get().then(allWaters => {
+        db.collection('vancouver_drinking_fountains').get().then(allWaters => {
           const features = []; // Defines an empty array for information to be added to
 
           allWaters.forEach(doc => {
-            lat = doc.data().geom.coordinates[1];
-            lng = doc.data().geom.coordinates[0];
+
+            if (count >= 5) {
+              return;
+            }
+
+            lat = doc.data().geo_point_2d.lat;
+            lng = doc.data().geo_point_2d.lon;
             coordinates = [lng, lat];
-            event_name = doc.data().name; // Event Name
-            preview = doc.data().location; // Text Preview
+            fountainName = doc.data().name;
+            fountainLocation = doc.data().location;
             operation = doc.data().in_operation;
-            // img = doc.data().posterurl; // Image
-            // url = doc.data().link; // URL
 
             // Pushes information into the features array
-            // in our application, we have a string description of the hike
             features.push({
               'type': 'Feature',
               'properties': {
-                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/content.html?id=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
+                'description': `<strong>${fountainName}</strong><p>${fountainLocation}</p> <br> <a href="/content.html?id=${doc.id}" target="_blank" title="Opens in a new window" style="color:blue;"">See more</a>`
               },
               'geometry': {
                 'type': 'Point',
                 'coordinates': coordinates
               }
             });
+
+            count++;
           });
 
           // Adds features as a source of data for the map
@@ -83,7 +90,7 @@ function showMap() {
 
           //-----------------------------------------------------------------------
           // Add Click event listener, and handler function that creates a popup
-          // that displays info from "hikes" collection in Firestore
+          // that displays info from db in Firestore
           //-----------------------------------------------------------------------
           map.on('click', 'places', (e) => {
             // Extract coordinates array.
@@ -118,7 +125,7 @@ function showMap() {
       }
     );
 
-    // Add the image to the map style.
+    // Add the image/icon to the map
     map.loadImage(
       'https://cdn-icons-png.flaticon.com/512/61/61168.png',
       (error, image) => {

@@ -126,3 +126,11 @@ h4 {
     color: #4511d3;
 
 }
+
+.card-image {
+    height: 400px !important;
+}
+
+#vancouver_drinking_fountains-go-here{
+    margin-bottom: 100px;
+}
