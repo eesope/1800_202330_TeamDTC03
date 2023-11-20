@@ -1,28 +1,22 @@
-async function writeJSONdata() {
+function writeJSONdata() {
+    fetch("./data/drinking-fountains.json")
+        .then(response => response.json())
+        .then(data => {
+            const batch = db.batch();
 
-    const response = await fetch("./data/drinking-fountains.json");
-    const data = await response.text(); //get string file
-    const drinkingFountains = JSON.parse(data); // convert to JSON
+            data.forEach((item, index) => {
+                // used mapid as uid
+                var docRef = db.collection("vancouver_drinking_fountains").doc(item.mapid);
+                batch.set(docRef, item);
+            });
 
-    var watersRef = db.collection("drinking_fountains");
-
-    for (x of drinkingFountains) {
-        mapid = x.mapid;
-        title = x.name;
-        in_operation = x.in_operation;
-        pet_friendly = x.pet_friendly;
-        geo_point = x.geo_point_2d;
-        area = x.geo_local_area;
-
-        watersRef.add({
-            mapid: mapid,
-            title: title,
-            in_operation: in_operation,
-            pet_friendly: pet_friendly,
-            geo_point: geo_point,
-            area: area
+            return batch.commit().then(() => {
+                console.log('Successfully saved data to Firestore');
+            });
+        })
+        .catch(error => {
+            console.error('Error reading JSON file or saving to Firestore:', error);
         });
-    }
 }
 
 // writeJSONdata();

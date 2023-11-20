@@ -7,7 +7,7 @@ function showMap() {
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
     center: [123.1207, 49.2827], // Starting position [lng, lat]
-    zoom: 10 // Starting zoom
+    zoom: 2 // Starting zoom
   });
 
   // Add user controls to map (compass and zoom) to top left
@@ -37,10 +37,7 @@ function showMap() {
           allWaters.forEach(doc => {
             lat = doc.data().geom.coordinates[1];
             lng = doc.data().geom.coordinates[0];
-            console.log(lat, lng);
             coordinates = [lng, lat];
-            console.log(coordinates);
-            // Coordinates
             event_name = doc.data().name; // Event Name
             preview = doc.data().location; // Text Preview
             operation = doc.data().in_operation;
