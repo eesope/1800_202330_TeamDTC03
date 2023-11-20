@@ -123,3 +123,36 @@ function getBottleCount(user) {
         }
         );
 }
+
+
+// Find the anchor tag by its ID
+let myReviewsLink = document.getElementById("myReviewsLink");
+
+// Get the currently logged-in user
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        let userID = user.uid;
+
+        // Retrieve document matching the user's userID
+        db.collection("reviews")
+            .where("userID", "==", userID)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    let docID = doc.id;
+
+                    // Update the href attribute to include the docID
+                    myReviewsLink.href = `my_reviews.html?docID=${docID}`;
+
+                    // Break the loop as we found the user's document
+                    return;
+                });
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+    } else {
+        // User is not logged in
+        console.log("No user is signed in");
+    }
+});

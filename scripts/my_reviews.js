@@ -1,73 +1,77 @@
-function addReviews() {
-    //define a variable for the collection you want to create in Firestore to populate data
-    var myReviews = db.collection("my_reviews");
+function displayReviewInfo() {
+    let params = new URL(window.location.href); //get URL of search bar
+    // console.log("params is =", params);
+    let ID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(ID);
 
-    myReviews.add({
-        code: "drink1",
-        name: "Water fountain #1",
-        region: "Downtown",
-        comment: "Great water fountain",
-        rating: "5 out of 5",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
-    myReviews.add({
-        code: "drink2",
-        name: "Water fountain #2",
-        region: "Mapole Ridge",
-        comment: "Great water fountain",
-        rating: "5 out of 5",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
-    myReviews.add({
-        code: "drink3",
-        name: "Water fountain #3",
-        region: "China Town",
-        comment: "Dirty water fountain",
-        rating: "2 out of 5",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
+    // doublecheck: is your collection called "Reviews" or "reviews"?
+    db.collection("reviews")
+        .doc(ID)
+        .get()
+        .then(doc => {
+            thisReview = doc.data();
+            reviewCode = thisReview.code;
+            reviewName = doc.data().title;
+
+            // only populate title, and image
+            document.getElementById("reviewName").innerHTML = reviewName;
+            // let imgEvent = document.querySelector(".review-img");
+            // imgEvent.src = "../images/" + reviewCode + ".jpg";
+        });
 }
-//------------------------------------------------------------------------------
-// Input parameter is a string representing the collection we are reading from
-//------------------------------------------------------------------------------
-function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("myReviewTemplate"); // Retrieve the HTML element with the ID "myReviewTemplate" and store it in the cardTemplate variable. 
+displayReviewInfo();
 
-    db.collection(collection).get()   //the collection called "hikes"
-        .then(allReviews => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each review
-            allReviews.forEach(doc => { //iterate thru each doc
-                var title = doc.data().name;       // get value of the "name" key
-                //var details = doc.data().details;  // get value of the "details" key
-                var fountainCode = doc.data().code;    //get unique ID to each fountain to be used for fetching right image
-                var region = doc.data().region; //gets the region field
-                var comment = doc.data().comment; //gets the comment field
-                var rating = doc.data().rating; //gets the rating field
-                var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+function saveReviewDocumentIDAndRedirect() {
+    let params = new URL(window.location.href); //get URL of search bar
+    let ID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(ID);
 
-                //update title and text and image
-                newcard.querySelector('.card-title').innerHTML = title;
-                newcard.querySelector('.card-region').innerHTML = region;
-                newcard.querySelector('.card-comment').innerHTML = comment;
-                newcard.querySelector('.card-rating').innerHTML = rating;
-                console.log(rating)
-                newcard.querySelector('.card-image').src = `./images/${fountainCode}.jpg`; //Example: NV01.jpg
-                newcard.querySelector('a').href = "eachHike.html?docID=" + docID;
+    localStorage.setItem('reviewID', ID);
+    window.location.href = "my_reviews.html";
 
-                //Optional: give unique ids to all elements for future use
-                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-
-                //attach to gallery, Example: "hikes-go-here"
-                document.getElementById(collection + "-go-here").appendChild(newcard);
-
-                //i++;   //Optional: iterate variable to serve as unique ID
-            })
-        })
+    
 }
 
-// addReviews(); //calling the function
 
-displayCardsDynamically("my_reviews");  //input param is the name of the collection
+
+function populateReviews() {
+    let reviewCardTemplate = document.getElementById("myReviewTemplate");
+    let reviewCardGroup = document.getElementById("reviewCardGroup");
+
+    let params = new URL(window.location.href);
+    let reviewID = params.searchParams.get("docID");
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            db.collection("reviews")
+                .where("reviewDocID", "==", reviewID)
+                .where("userID", "==", user.uid)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        var title = doc.data().title;
+                        var description = doc.data().description;
+                        var time = doc.data().timestamp.toDate();
+
+                        let reviewCard = reviewCardTemplate.content.cloneNode(true);
+                        reviewCard.querySelector(".title").innerHTML = title;
+                        reviewCard.querySelector(".time").innerHTML = new Date(
+                            time
+                        ).toLocaleString();
+                        reviewCard.querySelector(".description").innerHTML = `Description: ${description}`;
+
+                        reviewCardGroup.appendChild(reviewCard);
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting reviews: ", error);
+                });
+        } else {
+            console.log("No user is signed in");
+            // Handle when no user is signed in
+        }
+    });
+}
+
+// Call the function to populate the user's reviews
+populateReviews();
