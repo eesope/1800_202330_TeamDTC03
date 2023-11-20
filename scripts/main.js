@@ -1,3 +1,6 @@
+//Global variable pointing to the current user's Firestore document
+var currentUser;
+
 function doAll() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -128,7 +131,7 @@ function displayCardsDynamically(collection) {
 
 function updateBookmark(fountainDocID) {
     currentUser.get().then(userDoc => {
-        let bookmarks = userDoc.data().bookmarks;
+        let bookmarks = userDoc.data().bookmarks || [];
         let iconID = "save-" + fountainDocID;
         let isBookmarked = bookmarks.includes(fountainDocID);
 
@@ -139,6 +142,7 @@ function updateBookmark(fountainDocID) {
                 document.getElementById(iconID).innerText = 'bookmark_border';
             })
         } else {
+            console.log("cant find bookmark");
             currentUser.update({
                 bookmarks: firebase.firestore.FieldValue.arrayUnion(fountainDocID)
             }).then(() => {
