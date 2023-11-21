@@ -46,7 +46,7 @@ function getBookmarks(user) {
             // Iterate through the ARRAY of bookmarked fountains (document ID's)
             bookmarks.forEach(thisFountainID => {
                 console.log(thisFountainID);
-                db.collection("drinking_water_fountains").doc(thisFountainID).get().then(doc => {
+                db.collection("vancouver_drinking_fountains").doc(thisFountainID).get().then(doc => {
                     var title = doc.data().name; // get value of the "name" key
                     var details = doc.data().location; // get value of the "details" key
                     var pet_friendly = doc.data().pet_friendly;
