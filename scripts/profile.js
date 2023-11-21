@@ -125,6 +125,11 @@ function getBottleCount(user) {
 }
 
 
+
+
+
+
+
 // Find the anchor tag by its ID
 let myReviewsLink = document.getElementById("myReviewsLink");
 
@@ -142,7 +147,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     let docID = doc.id;
 
                     // Update the href attribute to include the docID
-                    myReviewsLink.href = `my_reviews.html?docID=${docID}`;
+                    myReviewsLink.href = `my_reviews.html?docID=${userID}`;
 
                     // Break the loop as we found the user's document
                     return;
@@ -156,3 +161,4 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log("No user is signed in");
     }
 });
+
