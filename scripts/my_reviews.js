@@ -1,77 +1,77 @@
-function displayReviewInfo() {
-    let params = new URL(window.location.href); //get URL of search bar
-    // console.log("params is =", params);
-    let ID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(ID);
+db.collection('reviews').get().then((snapshot) => {
+    let first = true;
+    snapshot.forEach((doc) => {
+        if (first) {
+            console.log(doc.data());
+            var template = `<div class="water_fountains pb-2">
+                <div class="container-fluid mb-3 pb-3">
+                    <div class="title bg-white mb-3">${doc.data().title}</div>
+                    <div class="card-body bg-white">
+                        <p class="description">${doc.data().description}</p>
+                    </div>
+                    <span class="date">${new Date(doc.data().timestamp.toDate()).toLocaleDateString()} ${new Date(doc.data().date.toDate()).toLocaleTimeString()}</span>
+                </div>
+            </div>`;
+            $('.reviewing').append(template);
+            first = false;
+        }
+    })
 
-    // doublecheck: is your collection called "Reviews" or "reviews"?
-    db.collection("reviews")
-        .doc(ID)
-        .get()
-        .then(doc => {
-            thisReview = doc.data();
-            reviewCode = thisReview.code;
-            reviewName = doc.data().title;
+})
 
-            // only populate title, and image
-            document.getElementById("reviewName").innerHTML = reviewName;
-            // let imgEvent = document.querySelector(".review-img");
-            // imgEvent.src = "../images/" + reviewCode + ".jpg";
-        });
+function displayWaterInfo() {
+    let params = new URL(window.location.href); //get url of search bar
+    let ID = params.searchParams.get("docID"); //get value for key "docID"
+    console.log(ID)
 }
-displayReviewInfo();
-
-function saveReviewDocumentIDAndRedirect() {
-    let params = new URL(window.location.href); //get URL of search bar
-    let ID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(ID);
-
-    localStorage.setItem('reviewID', ID);
-    window.location.href = "my_reviews.html";
-
-    
-}
-
-
 
 function populateReviews() {
-    let reviewCardTemplate = document.getElementById("myReviewTemplate");
-    let reviewCardGroup = document.getElementById("reviewCardGroup");
+    let water_fountain_CardTemplate = document.getElementById("reviewCardTemplate");
+    let water_fountain_Group = document.getElementById("reviewCardGroup");
 
-    let params = new URL(window.location.href);
-    let reviewID = params.searchParams.get("docID");
+    let params = new URL(window.location.href); // Get the URL from the search bar
+    let userID = params.searchParams.get("docID");
 
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            db.collection("reviews")
-                .where("reviewDocID", "==", reviewID)
-                .where("userID", "==", user.uid)
-                .get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        var title = doc.data().title;
-                        var description = doc.data().description;
-                        var time = doc.data().timestamp.toDate();
+    // Double-check: is your collection called "Reviews" or "reviews"?
+    db.collection("reviews")
+        .where("userID", "==", userID)
+        .get()
+        .then((allReviews) => {
+            reviews = allReviews.docs;
+            console.log(reviews);
+            reviews.forEach((doc) => {
+                var title = doc.data().title;
+                var description = doc.data().description;
+                var time = doc.data().timestamp.toDate();
+                var rating = doc.data().rating; // Get the rating value
+                console.log(rating);
 
-                        let reviewCard = reviewCardTemplate.content.cloneNode(true);
-                        reviewCard.querySelector(".title").innerHTML = title;
-                        reviewCard.querySelector(".time").innerHTML = new Date(
-                            time
-                        ).toLocaleString();
-                        reviewCard.querySelector(".description").innerHTML = `Description: ${description}`;
+                console.log(time);
 
-                        reviewCardGroup.appendChild(reviewCard);
-                    });
-                })
-                .catch((error) => {
-                    console.log("Error getting reviews: ", error);
-                });
-        } else {
-            console.log("No user is signed in");
-            // Handle when no user is signed in
-        }
-    });
+                let reviewCard = water_fountain_CardTemplate.content.cloneNode(true);
+                reviewCard.querySelector(".title").innerHTML = title;
+                reviewCard.querySelector(".time").innerHTML = new Date(
+                    time
+                ).toLocaleString();
+                reviewCard.querySelector(".description").innerHTML = `Description: ${description}`;
+
+                // Populate the star rating based on the rating value
+
+                // Initialize an empty string to store the star rating HTML
+                let starRating = "";
+                // This loop runs from i=0 to i<rating, where 'rating' is a variable holding the rating value.
+                for (let i = 0; i < rating; i++) {
+                    starRating += '<span class="material-icons">star</span>';
+                }
+                // After the first loop, this second loop runs from i=rating to i<5.
+                for (let i = rating; i < 5; i++) {
+                    starRating += '<span class="material-icons">star_outline</span>';
+                }
+                reviewCard.querySelector(".star-rating").innerHTML = starRating;
+
+                water_fountain_Group.appendChild(reviewCard);
+            });
+        });
 }
 
-// Call the function to populate the user's reviews
 populateReviews();

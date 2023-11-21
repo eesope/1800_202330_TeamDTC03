@@ -57,32 +57,30 @@
     <!-- the body of your page goes here -->
     <!-- stuff -->
     <div class="container">
-        <h1>My reviews</h1>
-        <!-- Here is the container for cards  -->
-        <div class="container">
-            <div id="my_reviews-go-here" class="row row-cols-auto">
+        <h2>My reviews:</h2>
+        <div id="details-go-here"></div>
+        <!-- Here is the container for cards with horizontal scrolling -->
+        <div class="card-container">
+            <div id="reviewCardGroup" class="row row-cols-auto">
+                <!-- Add your card templates here -->
             </div>
         </div>
     </div>
 
-    <!-- Templates for general use, not displayed -->
-    <template id="myReviewTemplate">
-        <div class="card py-2 mx-2" style="width: 18rem">
-            <img class="card-image card-img-top" src=" ..." alt="..." />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-region">placeholder</p>
-                <p class="card-rating">placeholder</p>
-                <p class="card-comment">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+    <template id="reviewCardTemplate">
+        <div class="card bg-secondary">
+            <img class="card-img-top">
+            <div class="card-body bg-light">
+                <h5 class="title">placeholder</h5>
+                <p class="star-rating"></p>
+                <p class="time">placeholder</p>
+                <br>
+                <p class="description">This card has supporting text below as a natural lead-in to additional
+                    content.
                 </p>
-                <a class="btn btn-primary card-href">Go to this fountain</a>
             </div>
         </div>
     </template>
-
-    </section>
 
     <!-- our own footer goes here-->
     <footer class="navbar justify-content-evenly bg-info fixed-bottom">
