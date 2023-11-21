@@ -1,14 +1,12 @@
 function showMap() {
-  //------------------------------------------
-  // Defines and initiates basic mapbox data
-  //------------------------------------------
-  mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
 
+  // Defines and initiates basic mapbox data
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
   const map = new mapboxgl.Map({ // define mapbox data
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
     center: [-123.1207, 49.2827], // Starting position [lng, lat]
-    zoom: 15 // Starting zoom
+    zoom: 10 // Starting zoom
   });
 
   // Add user controls to map (compass and zoom) to top left
@@ -16,10 +14,7 @@ function showMap() {
   map.addControl(nav, 'top-left');
 
 
-  //------------------------------------
-  // Listen for when map finishes loading
-  // then Add map features 
-  //------------------------------------
+  // Listen for when map finishes loading -> add map features 
   map.on('load', () => {
 
     // Defines map pin icon for events
@@ -28,8 +23,9 @@ function showMap() {
       (error, image) => {
         if (error) throw error;
 
-        map.addImage('eventpin', image); // Pin Icon
+        map.addImage('eventpin', image);
 
+        // set counting only 5 locations to prevent exceeding firestore quota
         let count = 0;
 
         // READING information from db in Firestore
@@ -92,6 +88,10 @@ function showMap() {
           // that displays info from db in Firestore
           //-----------------------------------------------------------------------
           map.on('click', 'places', (e) => {
+
+            const id = e.features[0].properties.id;
+            window.location.href = './content.html?docID=' + id;
+
             // Extract coordinates array.
             // Extract description of that place
             const coordinates = e.features[0].geometry.coordinates.slice();
@@ -170,7 +170,6 @@ function showMap() {
 
             // Map On Click function that creates a popup displaying the user's location
             map.on('click', 'userLocation', (e) => {
-              // Copy coordinates array.
               const coordinates = e.features[0].geometry.coordinates.slice();
               const description = e.features[0].properties.description;
 
@@ -185,7 +184,6 @@ function showMap() {
               map.getCanvas().style.cursor = 'pointer';
             });
 
-            // Defaults
             // Defaults cursor when not hovering over the userLocation layer
             map.on('mouseleave', 'userLocation', () => {
               map.getCanvas().style.cursor = '';
