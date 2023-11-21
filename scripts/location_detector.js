@@ -26,27 +26,22 @@ function placeGeocoder() {
 
     geocoder.addTo('#geocoder');
 
-    // Get the geocoder results container.
-    const results = document.getElementById('result');
-
-    // Add geocoder result to container.
-    geocoder.on('result', (e) => {
-        var jsondata = JSON.stringify(e.result, null, 2);
+    const user_location = document.getElementById('user_location');
+    // Add geocoder result to screen
+    geocoder.on('user_location', (e) => {
+        var jsondata = JSON.stringify(e.user_location, null, 2);
         var data = JSON.parse(jsondata);
-        console.log(data);
         var place_name = data["place_name"];
-        var place_coord = data["geometry"]["coordinates"];
-        results.innerText = place_name + " " + place_coord;  //show it on dom, debug
 
-        //You can save this into local storage for now.  
-        //When it is time to Submit the Post you can get the data from Local Storage
+        console.log(data);
+        console.log(place_name)
+
+        user_location.innerText = place_name
         localStorage.setItem("place_name", place_name);
-        localStorage.setItem("place_coord", place_coord);
     });
 
-    // Clear results container when search is cleared.
     geocoder.on('clear', () => {
-        results.innerText = '';
+        user_location.innerText = '';
     });
 }
 

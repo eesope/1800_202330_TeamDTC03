@@ -39,7 +39,7 @@ function displayCardsDynamically(collection) {
 
     let count = 0; //to show only limited locations
 
-    db.collection(collection).get()   //the collection called "Drinking_water_fountains"
+    db.collection(collection).get()  
         .then(allWaters => {
             allWaters.forEach(doc => {
 
@@ -80,11 +80,6 @@ function displayCardsDynamically(collection) {
                     //get the user name
                     var bookmarks = userDoc.data().bookmarks;
 
-                    // force to make new bookmark array
-                    // currentUser.update({
-                    //     bookmarks: firebase.firestore.FieldValue.arrayUnion()
-                    // })
-
                     if (bookmarks.includes(docID)) {
                         document.getElementById('save-' + docID).innerText = 'bookmark';
                     }
@@ -98,28 +93,6 @@ function displayCardsDynamically(collection) {
             console.error('Error displaying cards:', error);
         });
 }
-
-//-----------------------------------------------------------------------------
-// This function is called whenever the user clicks on the "bookmark" icon.
-// It adds the hike to the "bookmarks" array
-// Then it will change the bookmark icon from the hollow to the solid version. 
-//-----------------------------------------------------------------------------
-// function saveBookmark() {
-//     // Manage the backend process to store the hikeDocID in the database, recording which hike was bookmarked by the user.
-//     currentUser.update({
-//         // Use 'arrayUnion' to add the new bookmark ID to the 'bookmarks' array.
-//         // This method ensures that the ID is added only if it's not already present, preventing duplicates.
-//         bookmarks: firebase.firestore.FieldValue.arrayUnion(fountainDocID)
-//     })
-//         // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
-//         .then(function () {
-//             console.log("bookmark has been saved for" + fountainDocID);
-//             var iconID = 'save-' + fountainDocID;
-//             //console.log(iconID);
-//             //this is to change the icon of the hike that was saved to "filled"
-//             document.getElementById(iconID).innerText = 'bookmark';
-//         });
-// }
 
 // function to update the bookmark
 function updateBookmark(fountainDocID) {

@@ -30,17 +30,12 @@ function showMap() {
 
         map.addImage('eventpin', image); // Pin Icon
 
-        let count = 0;
 
         // READING information from db in Firestore
         db.collection('vancouver_drinking_fountains').get().then(allWaters => {
           const features = []; // Defines an empty array for information to be added to
 
           allWaters.forEach(doc => {
-
-            if (count >= 5) {
-              return;
-            }
 
             lat = doc.data().geo_point_2d.lat;
             lng = doc.data().geo_point_2d.lon;
@@ -61,10 +56,9 @@ function showMap() {
               }
             });
 
-            count++;
           });
 
-          
+
           // Adds features as a source of data for the map
           map.addSource('places', {
             'type': 'geojson',
