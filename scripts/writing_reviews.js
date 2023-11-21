@@ -1,8 +1,8 @@
 var water_fountainID = localStorage.getItem('water_fountainID');
 
 function displayWater_fountainName() {
-    db.collection('drinking_fountains').doc(water_fountainID).get().then( (thisWater_fountain)=>{
-        water_fountainName = thisWater_fountain.data().title;
+    db.collection('vancouver_drinking_fountains').doc(water_fountainID).get().then( (thisWater_fountain)=>{
+        water_fountainName = thisWater_fountain.data().location;
         document.getElementById("water_fountain_Name").innerHTML = water_fountainName;
     })
 
