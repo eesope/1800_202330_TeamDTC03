@@ -35,43 +35,52 @@ listenFileSelect();
 // This function is called AFTER the post has been created, 
 // and we know the post's document id.
 //------------------------------------------------
-function uploadPic(reviewDocID) {
-    console.log("inside uploadPic " + reviewDocID);
-    var storageRef = storage.ref("images/" + reviewDocID + ".jpg");
+function uploadPic(postDocID) {
+    return new Promise((resolve, reject) => {
+        console.log("inside uploadPic " + postDocID);
+        var storageRef = storage.ref("images/" + postDocID + ".jpg");
 
-    storageRef.put(ImageFile)   //global variable ImageFile
-
-        // AFTER .put() is done
-        .then(function () {
-            console.log('2. Uploaded to Cloud Storage.');
-            storageRef.getDownloadURL()
-
-                // AFTER .getDownloadURL is done
-                .then(function (url) { // Get URL of the uploaded file
-                    console.log("3. Got the download URL.");
-
-                    // Now that the image is on Storage, we can go back to the
-                    // post document, and update it with an "image" field
-                    // that contains the url of where the picture is stored.
-                    db.collection("reviews").doc(reviewDocID).update({
-                        "image": url // Save the URL into users collection
-                    })
-                        // AFTER .update is done
-                        .then(function () {
-                            console.log('4. Added pic URL to Firestore.');
-                            // One last thing to do:
-                            // save this postID into an array for the OWNER
-                            // so we can show "my posts" in the future
-                            savePostIDforUser(reviewDocID);
-                        })
-                })
-        })
-        .catch((error) => {
-            console.log("error uploading to cloud storage");
-        })
+        storageRef.put(ImageFile)
+            .then(function () {
+                console.log('2. Uploaded to Cloud Storage.');
+                return storageRef.getDownloadURL();
+            })
+            .then(function (url) {
+                console.log("3. Got the download URL.");
+                return db.collection("reviews").doc(postDocID).update({
+                    "image": url
+                });
+            })
+            .then(function () {
+                console.log('4. Added pic URL to Firestore.');
+                savePostIDforUser(postDocID);
+                resolve();
+            })
+            .catch((error) => {
+                console.log("error uploading to cloud storage", error);
+                reject(error);
+            });
+    });
 }
 
 
+function savePostIDforUser(postDocID) {
+    firebase.auth().onAuthStateChanged(user => {
+        console.log("user id is: " + user.uid);
+        console.log("postdoc id is: " + postDocID);
+        db.collection("users").doc(user.uid).update({
+            myposts: firebase.firestore.FieldValue.arrayUnion(postDocID)
+        })
+            .then(() => {
+                console.log("5. Saved to user's document!");
+                alert("Post is complete!");
+                //window.location.href = "showposts.html";
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    })
+}
 
 
 // Add this JavaScript code to make stars clickable
@@ -125,8 +134,14 @@ function savePost() {
             description: water_fountain_Description,
             rating: water_fountain_Rating, // Include the rating in the review
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(doc => {
+            console.log("1. Post document added!");
+            return uploadPic(doc.id);
         }).then(() => {
-            window.location.href = "thanks.html"; // Redirect to the thanks page
+            console.log("Redirecting to thanks page");
+            window.location.href = "thanks.html";
+        }).catch(error => {
+            console.error("Error: ", error);
         });
     } else {
         console.log("No user is signed in");
