@@ -145,6 +145,7 @@ firebase.auth().onAuthStateChanged((user) => {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     let docID = doc.id;
+                    console.log(userID);
 
                     // Update the href attribute to include the docID
                     myReviewsLink.href = `my_reviews.html?docID=${userID}`;
