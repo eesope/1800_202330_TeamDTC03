@@ -8,7 +8,7 @@ function showMap() {
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
     center: [-123.1207, 49.2827], // Starting position [lng, lat]
-    zoom: 2 // Starting zoom
+    zoom: 15 // Starting zoom
   });
 
   // Add user controls to map (compass and zoom) to top left
@@ -28,12 +28,11 @@ function showMap() {
       (error, image) => {
         if (error) throw error;
 
-        // Add the image to the map style.
         map.addImage('eventpin', image); // Pin Icon
 
         let count = 0;
 
-        // READING information from "hikes" collection in Firestore
+        // READING information from db in Firestore
         db.collection('vancouver_drinking_fountains').get().then(allWaters => {
           const features = []; // Defines an empty array for information to be added to
 
@@ -65,6 +64,7 @@ function showMap() {
             count++;
           });
 
+          
           // Adds features as a source of data for the map
           map.addSource('places', {
             'type': 'geojson',
@@ -79,7 +79,6 @@ function showMap() {
           map.addLayer({
             'id': 'places',
             'type': 'symbol',
-            // source: 'places',
             'source': 'places',
             'layout': {
               'icon-image': 'eventpin', // Pin Icon
@@ -137,7 +136,8 @@ function showMap() {
         // Adds user's current location as a source to the map
         navigator.geolocation.getCurrentPosition(position => {
           const userLocation = [position.coords.longitude, position.coords.latitude];
-          console.log(userLocation);
+          console.log("user location from line138", userLocation);
+
           if (userLocation) {
             map.addSource('userLocation', {
               'type': 'geojson',
@@ -205,8 +205,9 @@ function showMap() {
   // Get the user's location
   navigator.geolocation.getCurrentPosition(function (position) {
     userLocation = [position.coords.longitude, position.coords.latitude];
-    console.log(userLocation);
-    console.log(searchLocation);
+
+    console.log("current location from line207:", userLocation);
+    console.log("seraching for: ", searchLocation);
 
     // Add a marker to the map at the user's location
     userLocationMarker = new mapboxgl.Marker()
@@ -229,8 +230,8 @@ function showMap() {
   // Listen for the 'result' event from the geocoder (when a search is made)
   geocoder.on('result', function (e) {
     searchLocation = e.result.geometry.coordinates;
-    console.log(userLocation);
-    console.log(searchLocation);
+    console.log("user location on geocoder: ", userLocation);
+    console.log("search location on geocoder: ", searchLocation);
 
     // Add a marker to the map at the search location
     searchLocationMarker && searchLocationMarker.remove(); // Remove the previous search marker if it exists

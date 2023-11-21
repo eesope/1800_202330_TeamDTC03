@@ -32,6 +32,15 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
+    <!-- to use mapbox api and its geocoding -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+        type="text/css">
+
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
@@ -51,15 +60,10 @@
     <div id="top_main">
         <div id="current_location" class="d-flex">
             <i id="my_location_icon" class="material-icons">my_location</i>
-            <div>V6B 3H6, Vancouver</div>
+            <div id="user_location"></div>
         </div>
-
-        <div id="search_location" class="input-group mb-3">
-            <a href=""><span class="input-group-text" id="inputGroup-sizing-default"><i
-                        class="material-icons">search</i></span></a>
-            <input id="user_search" type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" placeholder="Search the location...">
-        </div>
+        <div id="result"></div>
+        <div id="geocoder"></div>
 
         <div id="change_view" class="d-flex text-center">
             <a class="btn flex-fill" href="main_list.html" role="button">
@@ -133,6 +137,7 @@
     <script src="./scripts/city_api.js"></script>
 
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/location_detector.js"></script>
 
 </body>
 
