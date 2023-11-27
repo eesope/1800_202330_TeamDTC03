@@ -88,9 +88,9 @@ function populateReviews() {
                 reviewCard.querySelector(".star-rating").innerHTML = starRating;
 
                 if (photoUrl) {
-                    let imgElement = reviewCard.querySelector("img"); // Your template needs to have an img tag
+                    let imgElement = reviewCard.querySelector("img"); 
                     imgElement.src = photoUrl;
-                    imgElement.alt = "User uploaded image"; // Set an appropriate alt text
+                    imgElement.alt = "User uploaded image"; 
                 }
 
                 water_fountain_Group.appendChild(reviewCard);

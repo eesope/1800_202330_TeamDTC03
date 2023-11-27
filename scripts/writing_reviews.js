@@ -95,7 +95,10 @@ stars.forEach((star, index) => {
         // Fill in clicked star and stars before it
         for (let i = 0; i <= index; i++) {
             // Change the text content of stars to 'star' (filled)
-            document.getElementById(`star${i + 1}`).textContent = 'star';
+            stars[i].textContent = 'star';
+        }
+        for (let j = index + 1; j < stars.length; j++) {
+            stars[j].textContent = 'star_outline';
         }
     });
 });
