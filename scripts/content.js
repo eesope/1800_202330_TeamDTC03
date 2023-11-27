@@ -2,10 +2,9 @@ db.collection('reviews').get().then((snapshot) => {
     let first = true;
     snapshot.forEach((doc) => {
         if (first) {
-            console.log(doc.data());
             var template = `<div class="water_fountains pb-2">
                 <div class="container-fluid mb-3 pb-3">
-                    <div class="title bg-white mb-3">${doc.data().title}</div>
+                    <div class="title bg-white mb-3">${doc.data().name}</div>
                     <div class="card-body bg-white">
                         <p class="description">${doc.data().description}</p>
                     </div>
@@ -16,19 +15,33 @@ db.collection('reviews').get().then((snapshot) => {
             first = false;
         }
     })
-
 })
 
 function displayWaterInfo() {
     let params = new URL(window.location.href); //get url of search bar
     let ID = params.searchParams.get("docID"); //get value for key "docID"
-    console.log(ID)
+
+    db.collection("vancouver_drinking_fountains")
+    .doc(ID)
+    .get()
+    .then(doc => {
+        thisWater = doc.data()
+        waterCode = thisWater.code;
+        waterName = doc.data().name;
+
+        document.getElementById("waterName").innerHTML = waterName;
+        let imgEvent = document.querySelector(".hike-img");
+        imgEvent.src = "./images/" + hikeCode + ".jpg";
+    }
+
+    );
 }
+
+displayWaterInfo();
 
 function saveWaterFountainDocumentIDAndRedirect() {
     let params = new URL(window.location.href); //get url of search bar
     let ID = params.searchParams.get("docID"); //get value for key "docID"
-    console.log(ID)
 
     localStorage.setItem('water_fountainID', ID)
     window.location.href = "writing_reviews.html"
@@ -41,19 +54,16 @@ function populateReviews() {
     let params = new URL(window.location.href); // Get the URL from the search bar
     let water_fountainID = params.searchParams.get("docID");
 
-    // Double-check: is your collection called "Reviews" or "reviews"?
     db.collection("reviews")
         .where("water_fountain_DocID", "==", water_fountainID)
         .get()
         .then((allReviews) => {
             reviews = allReviews.docs;
-            console.log(reviews);
             reviews.forEach((doc) => {
                 var title = doc.data().title;
                 var description = doc.data().description;
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
-                console.log(rating);
 
                 console.log(time);
 

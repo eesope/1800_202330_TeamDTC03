@@ -49,7 +49,7 @@ function showMap() {
             features.push({
               'type': 'Feature',
               'properties': {
-                'description': `<strong>${fountainName}</strong><p>${fountainLocation}</p> <br> <a href="/content.html?id=${doc.id}" target="_blank" title="Opens in a new window" style="color:blue;"">See more</a>`
+                'description': `<strong>${fountainName}</strong><p>${fountainLocation}</p> <br> <a href="/content.html?docID=${doc.id}" target="_blank" title="Opens in a new window" style="color:blue;"">See more</a>`
               },
               'geometry': {
                 'type': 'Point',
@@ -90,7 +90,6 @@ function showMap() {
           map.on('click', 'places', (e) => {
 
             const id = e.features[0].properties.id;
-            window.location.href = './content.html?docID=' + id;
 
             // Extract coordinates array.
             // Extract description of that place
@@ -203,9 +202,6 @@ function showMap() {
   // Get the user's location
   navigator.geolocation.getCurrentPosition(function (position) {
     userLocation = [position.coords.longitude, position.coords.latitude];
-
-    console.log("current location from line207:", userLocation);
-    console.log("seraching for: ", searchLocation);
 
     // Add a marker to the map at the user's location
     userLocationMarker = new mapboxgl.Marker()
