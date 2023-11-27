@@ -64,13 +64,18 @@ Content of the project folder:
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
 ├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
+    /logo.png                # VanWater logo
 ├── scripts                  # Folder for scripts
-    /blah.js                 # 
+    /account_info.js         # 
+    /authentication.js       #
 ├── styles                   # Folder for styles
-    /blah.css                # 
-
-
+    /style.css               # own styles 
+├── data                     # Folder for styles
+    /drinking-fountains.json # information about drinking fountains from City of Vancouver
+├── text                     # Folder for styles
+    /footer.html             # footer including credit information
+    /nav_after_login.html    # navigation bar after a user login
+    /nav_before_login.html   # navigation bar before a user login
 
 ```
 

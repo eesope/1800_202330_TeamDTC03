@@ -4,7 +4,7 @@
 }
 
 .bg-info {
-    background-color: #BAE8E8 !important;
+    background-color: #0f71fa !important;
 }
 
 * {
@@ -45,11 +45,21 @@
 }
 
 .container .btn:hover {
-    background-color: #79dede;
+    background-color: whitesmoke;
+    color: black;
+}
+
+#list_see_more:hover {
+    color: black;
 }
 
 .dropdown {
     margin-left: 10px;
+}
+
+#list_dropdown {
+    margin-top: 10px;
+    text-align: end;
 }
 
 a {
@@ -66,10 +76,15 @@ a {
     width: 95%;
 }
 
-#change_view {
-    margin: 10px !important;
-    width: 95%;
+#my_location_icon{
+    color: #0f71fa;
+}
 
+#go_map_view{
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 3rem;
+    color: #0f71fa;
 }
 
 .card {
@@ -85,30 +100,12 @@ a {
     margin-bottom: 120px;
 }
 
-.btn-save {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    z-index: 1;
-    background-color: red;
-    /* Default background color */
-    color: white;
-    /* Default text color */
-}
-
 .reviewing {
     color: black;
 }
 
 .date {
     font-size: 1rem;
-}
-
-.btn-save.clicked {
-    background-color: white;
-    /* Updated background color when clicked */
-    color: red;
-    /* Updated text color when clicked */
 }
 
 h3,

@@ -62,31 +62,25 @@
             <i id="my_location_icon" class="material-icons">my_location</i>
             <div id="detected_location" class="flex-fill"></div>
         </div>
-
-        <div id="geocoder"></div>
-
-
-        <div id="change_view" class="d-flex text-center">
-            <a class="btn flex-fill" href="main_list.html" role="button">
-                <div class="p-2 bg-primary rounded-3 text-light">List</div>
-            </a>
-
-            <a class="btn flex-fill" href="main_map.html" role="button">
-                <div class="p-2 border border-primary-subtle rounded-3">Map</div>
-            </a>
-        </div>
     </div>
 
-    <div class="dropdown">
-        Sorted by:
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Distance
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item active" href="#">Distance</a></li>
-            <li><a class="dropdown-item" href="#">Rating</a></li>
-            <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
-        </ul>
+    <div id="geocoder"></div>
+
+    <div class="d-flex align-items-center">
+        <a href="main_map.html" class="me-auto"><i id="go_map_view" class="material-icons">map</i></a>
+
+        <div class="dropdown " id="list_dropdown">
+            Sorted by:
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Distance
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item active" href="#">Distance</a></li>
+                <li><a class="dropdown-item" href="#">Rating</a></li>
+                <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
+            </ul>
+        </div>
     </div>
     </div>
 
@@ -108,7 +102,7 @@
                 <p class="card-operation-pet">placeholder</p>
                 <p class="card-text">
                 </p>
-                <a href="content.html" class="btn btn-primary card-href">See more</a>
+                <a href="content.html" id="list_see_more" class="btn btn-primary card-href">See more</a>
                 <i class="material-icons">bookmark_border</i>
             </div>
         </div>
