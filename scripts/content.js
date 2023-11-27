@@ -28,10 +28,7 @@ function displayWaterInfo() {
         thisWater = doc.data()
         waterCode = thisWater.code;
         waterName = doc.data().name;
-
         document.getElementById("waterName").innerHTML = waterName;
-        let imgEvent = document.querySelector(".hike-img");
-        imgEvent.src = "./images/" + hikeCode + ".jpg";
     }
 
     );
