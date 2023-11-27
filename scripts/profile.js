@@ -1,20 +1,40 @@
-function doAll() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            currentUser = db.collection("users").doc(user.uid); //global
-            console.log(currentUser);
-            getNameFromAuth()
-            insertNameFromFirestore();
-            // the following functions are always called when someone is logged in
-            getBottleCount(user);
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to update myReviewsLink href with the provided userID
+    function updateMyReviewsLink(userID) {
+        let myReviewsLink = document.getElementById("myReviewsLink");
+        if (myReviewsLink) {
+            myReviewsLink.href = `my_reviews.html?docID=${userID}`;
         } else {
-            // No user is signed in.
-            console.log("No user is signed in");
-            window.location.href = "login.html";
+            console.log("Element 'myReviewsLink' not found.");
         }
-    });
-}
-doAll();
+    }
+
+    // Function to perform actions when the user is authenticated
+    function doAll() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                currentUser = db.collection("users").doc(user.uid); // global
+                console.log(currentUser);
+                userID = user.uid; // global
+                console.log(userID);
+                updateMyReviewsLink(userID); // Update myReviewsLink href
+
+                getNameFromAuth();
+                insertNameFromFirestore();
+                // The following functions are always called when someone is logged in
+                getBottleCount(user);
+            } else {
+                // No user is signed in.
+                console.log("No user is signed in");
+                window.location.href = "login.html";
+            }
+        });
+    }
+
+    // Call the doAll function
+    doAll();
+});
+
 
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
@@ -45,12 +65,10 @@ function insertNameFromFirestore() {
     // Check if the user is logged in:
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            console.log(user.uid); // Let's know who the logged-in user is by logging their UID
             currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
             currentUser.get().then(userDoc => {
                 // Get the user name
                 var userName = userDoc.data().name;
-                console.log(userName);
                 //$("#name-goes-here").text(userName); // jQuery
                 document.getElementById("name-goes-here").innerText = userName;
                 console.log("User name inserted into HTML");
@@ -123,43 +141,4 @@ function getBottleCount(user) {
         }
         );
 }
-
-
-
-
-
-
-
-// Find the anchor tag by its ID
-let myReviewsLink = document.getElementById("myReviewsLink");
-
-// Get the currently logged-in user
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        let userID = user.uid;
-
-        // Retrieve document matching the user's userID
-        db.collection("reviews")
-            .where("userID", "==", userID)
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    let docID = doc.id;
-                    console.log(userID);
-
-                    // Update the href attribute to include the docID
-                    myReviewsLink.href = `my_reviews.html?docID=${userID}`;
-
-                    // Break the loop as we found the user's document
-                    return;
-                });
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-    } else {
-        // User is not logged in
-        console.log("No user is signed in");
-    }
-});
 
