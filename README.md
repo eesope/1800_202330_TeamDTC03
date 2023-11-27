@@ -35,8 +35,8 @@ Here are some known bugs:
 
 ## 6. Features for Future
 What we'd like to build in the future:
-* ...
-* ...
+* We would like to let users post their profile photo
+* We would like to let users share the location with 
 * ...
 	
 ## 7. Contents of Folder

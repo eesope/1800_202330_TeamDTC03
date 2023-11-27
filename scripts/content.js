@@ -53,6 +53,7 @@ function populateReviews() {
                 var description = doc.data().description;
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
+                var photoUrl = doc.data().image;
                 console.log(rating);
 
                 console.log(time);
@@ -78,9 +79,61 @@ function populateReviews() {
                 }
                 reviewCard.querySelector(".star-rating").innerHTML = starRating;
 
+                if (photoUrl) {
+                    let imgElement = reviewCard.querySelector("img"); // Your template needs to have an img tag
+                    imgElement.src = photoUrl;
+                    imgElement.alt = "User uploaded image"; // Set an appropriate alt text
+                }
+
                 water_fountain_Group.appendChild(reviewCard);
             });
+        })
+        .catch((error) => {
+            console.error("Error populating reviews:", error);
         });
 }
 
 populateReviews();
+
+function displayImage() {
+    // Extract docID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const docID = urlParams.get('docID');
+
+    if (!docID) {
+        console.log("Document ID is not provided in the URL");
+        return;
+    }
+
+    const docRef = db.collection('vancouver_drinking_fountains').doc(docID);
+
+    docRef.get()
+        .then(doc => {
+            if (doc.exists) {
+                const data = doc.data();
+                const fountainImg = data.photo_name;
+                const maintainer = data.maintainer;
+                let imgUrl = '';
+
+                if (maintainer === "parks") {
+                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
+                } else if (maintainer === "Engineering") {
+                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                }
+
+                const imageElement = document.getElementById('fountainImage');
+                if (imageElement) {
+                    imageElement.src = imgUrl;
+                } else {
+                    console.error('Image element not found.');
+                }
+            } else {
+                console.error("No such document!");
+            }
+        })
+        .catch(error => {
+            console.error("Error getting document:", error);
+        });
+}
+
+displayImage();
