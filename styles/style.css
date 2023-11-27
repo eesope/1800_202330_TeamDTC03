@@ -131,3 +131,18 @@ h4 {
 #vancouver_drinking_fountains-go-here{
     margin-bottom: 100px;
 }
+
+.review_box .card {
+    width: 400px;
+    display: flex;
+}
+
+#main_photo {
+    margin: auto;
+}
+
+#write_review_button {
+    margin-left: 10px;
+    margin-right: 10px;
+
+}

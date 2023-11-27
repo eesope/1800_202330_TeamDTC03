@@ -61,13 +61,13 @@
     </div>
 <!-- Templates for general use, not displayed -->
 
-    <div class="card py-1 mx-1" style="width: 90%; height: 70%">
+    <div class="card py-1 mx-1" style="width: 95%; height: 70%;">
         <img id="fountainImage" class="card-image card-img-top" alt="no image available" />
     </div>
 
 </div>
     <div class="d-grid gap-2">
-        <button class="btn btn-primary mb-3" onclick="saveWaterFountainDocumentIDAndRedirect()">Write
+        <button id="write_review_button" class="btn btn-primary mb-3" onclick="saveWaterFountainDocumentIDAndRedirect()">Write
             Review</button>
     </div>
 
@@ -82,7 +82,7 @@
                 <h2>Reviews:</h2>
                 <div id="details-go-here"></div>
                 <!-- Here is the container for cards with horizontal scrolling -->
-                <div class="card-container">
+                <div class="card-container review_box">
                     <div id="reviewCardGroup" class="row row-cols-auto">
                         <!-- Add your card templates here -->
                     </div>
