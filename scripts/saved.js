@@ -14,11 +14,6 @@ function doAll() {
 }
 doAll();
 
-//----------------------------------------------------------
-// Wouldn't it be nice to see the User's Name on this page?
-// Let's do it!  (Thinking ahead:  This function can be carved out, 
-// and put into script.js for other pages to use as well).
-//----------------------------------------------------------//----------------------------------------------------------
 // Function to retrieve the user's name from Firestore based on their UID and update the UI
 function insertNameFromFirestore(user) {
     // Accesses the Firestore collection "users" and retrieves the document corresponding to the user's UID

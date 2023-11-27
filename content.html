@@ -46,67 +46,33 @@
 </head>
 
 <body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-
-    <!-- our own navbar goes here -->
-    <!-- <nav id="navbarPlaceholder"></nav> -->
-
-    <!-- the body of your page goes here -->
     <!-- stuff -->
     <div class="back-btn">
         <a class="btn back-btn btn-lg" style="background-color: #555" href="main_list.html" role="button"><span
                 class="material-symbols-outlined">arrow_back</span></a>
     </div>
-    <div id="carouselExampleIndicators" class="carousel slide mb-1" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="images/waterfountain_one.jpeg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/waterfountain_three.jpeg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/water_fountain.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+    <!-- Templates for general use, not displayed -->
+
+    <div class="card py-1 mx-1" style="width: 95%; height: 70%;">
+        <img id="fountainImage" class="card-image card-img-top" alt="no image available" />
+    </div>
+
     </div>
     <div class="d-grid gap-2">
-        <button class="btn btn-primary mb-3" onclick="saveWaterFountainDocumentIDAndRedirect()">Write
+        <button id="write_review_button" class="btn btn-primary mb-3" onclick="saveWaterFountainDocumentIDAndRedirect()">Write
             Review</button>
     </div>
 
     <div class="overflow-auto">
         <div class="info">
-            <div class>
-                <!-- replace this with the name from API -->
-                <h3>Water fountain #1</h3>
-            </div>
-
             <div class="container">
+
+                <h3><span id="waterName">Fountain name</span></h3>
+
                 <h2>Reviews:</h2>
                 <div id="details-go-here"></div>
                 <!-- Here is the container for cards with horizontal scrolling -->
-                <div class="card-container">
+                <div class="card-container review_box">
                     <div id="reviewCardGroup" class="row row-cols-auto">
                         <!-- Add your card templates here -->
                     </div>
@@ -124,6 +90,7 @@
                         <p class="description">This card has supporting text below as a natural lead-in to additional
                             content.
                         </p>
+                        <img src="" class="mypic-goes-here">
                     </div>
                 </div>
             </template>
