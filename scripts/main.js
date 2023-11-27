@@ -5,8 +5,6 @@ function doAll() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-
-            insertNameFromFirestore();
             displayCardsDynamically("vancouver_drinking_fountains");
         } else {
             console.log("No user is signed in");
@@ -16,21 +14,6 @@ function doAll() {
 }
 doAll();
 
-function insertNameFromFirestore() {
-    // Check if the user is logged in:
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
-            currentUser.get().then(userDoc => {
-                // Get the user name
-                var userName = userDoc.data().name;
-            })
-        } else {
-            console.log("No user is logged in."); // Log a message when no user is logged in
-        }
-    })
-}
-
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
@@ -39,7 +22,7 @@ function displayCardsDynamically(collection) {
 
     let count = 0; //to show only limited locations
 
-    db.collection(collection).get()  
+    db.collection(collection).get()
         .then(allWaters => {
             allWaters.forEach(doc => {
 
@@ -79,7 +62,6 @@ function displayCardsDynamically(collection) {
                 currentUser.get().then(userDoc => {
                     //get the user name
                     var bookmarks = userDoc.data().bookmarks;
-
                     if (bookmarks.includes(docID)) {
                         document.getElementById('save-' + docID).innerText = 'bookmark';
                     }
