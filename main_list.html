@@ -67,7 +67,7 @@
     <div id="geocoder"></div>
 
     <div class="d-flex align-items-center">
-        <a href="main_map.html" class="me-auto"><i id="go_map_view" class="material-icons">map</i></a>
+        <a href="main_map.html" class="me-auto"><i id="go_map_view" class="material-icons">map</i>Map view</a>
 
         <div class="dropdown " id="list_dropdown">
             Sorted by:
@@ -76,9 +76,9 @@
                 Distance
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item active" href="#">Distance</a></li>
-                <li><a class="dropdown-item" href="#">Rating</a></li>
-                <li><a class="dropdown-item" href="#">Pet-friendly</a></li>
+                <li><a class="dropdown-item active" onclick="by_distance()">Distance</a></li>
+                <li><a class="dropdown-item" onclick="by_rating()">Rating</a></li>
+                <li><a class="dropdown-item" onclick="by_pet_friendly()">Pet-friendly</a></li>
             </ul>
         </div>
     </div>
