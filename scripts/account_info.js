@@ -37,21 +37,28 @@ function editUserInfo() {
 }
 
 function saveUserInfo() {
-    //enter code here
+    // Get user entered values
+    var userName = document.getElementById('nameInput').value;
+    var userVolume = document.getElementById('volumeInput').value;
 
-    //a) get user entered values
-    userName = document.getElementById('nameInput').value;
-    userVolume = document.getElementById('volumeInput').value;
-
-    //b) update user's document in Firestore
+    // Update user's document in Firestore
     currentUser.update({
         name: userName,
         volume: userVolume
-    }).then(function () {
-        console.log("User info updated");
-    });
+    })
+        .then(function () {
+            console.log("User info updated");
 
-    //c) disable edit 
-    document.getElementById('personalInfoFields').disabled = true;
-    console.log("User info saved");
+            // Disable edit 
+            document.getElementById('personalInfoFields').disabled = true;
+
+            // Alert user when the save is done
+            alert("User info saved");
+        })
+        .catch(function (error) {
+            // Handle errors if any
+            console.error("Error updating user info: ", error);
+            // Inform the user about the error
+            alert("Failed to save user info. Please try again later.");
+        });
 }
