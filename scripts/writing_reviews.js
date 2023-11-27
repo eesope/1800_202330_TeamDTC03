@@ -128,6 +128,7 @@ function savePost() {
 
         // Get the document for the current user.
         db.collection("reviews").add({
+            water_fountainName: water_fountainName,
             water_fountain_DocID: water_fountainID,
             userID: userID,
             title: water_fountain_Title,
