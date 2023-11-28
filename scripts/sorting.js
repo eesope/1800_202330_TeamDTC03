@@ -1,3 +1,4 @@
+// for list page
 function by_pet() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -10,10 +11,8 @@ function by_pet() {
     });
 }
 
+// filter pet friendly fountains and show it on list page
 function by_pet_friendly(collection) {
-
-    console.log("by pet friendly called")
-
     let cardTemplate = document.getElementById("waterCardTemplate");
     // clear the current view
     document.getElementById("vancouver_drinking_fountains-go-here").innerHTML = "";
@@ -71,4 +70,111 @@ function by_pet_friendly(collection) {
         .catch(error => {
             console.error('Error displaying cards:', error);
         });
+}
+
+// for map page
+function map_by_pet() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid); //global
+            map_by_pet_friendly("sample");
+        } else {
+            console.log("No user is signed in");
+            window.location.href = "login.html";
+        }
+    });
+}
+
+// filter pet friendly fountains and show it on map
+function map_by_pet_friendly(collection) {
+
+    // clear map div
+    document.getElementById("map").innerHTML = "";
+
+    // Defines and initiates basic mapbox data
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
+
+    // Move the map definition to a broader scope
+    const map = new mapboxgl.Map({
+        container: 'map', // Container ID
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-123.1207, 49.2827],
+        zoom: 10
+    });
+
+    // Add user controls to map (compass and zoom) to top left
+    var nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, 'top-left');
+
+    // Listen for when map finishes loading -> add map features 
+    map.on('load', () => {
+        // Defines map pin icon for events
+        map.loadImage(
+            'https://cdn.iconscout.com/icon/free/png-256/pin-locate-marker-location-navigation-16-28668.png',
+            (error, image) => {
+                if (error) throw error;
+
+                map.addImage('eventpin', image);
+
+                const features = []; // Defines an empty array for locations to be added to
+
+                // Clear existing sources and layers
+                if (map.getSource('places')) {
+                    map.removeLayer('places');
+                    map.removeSource('places');
+                }
+
+                db.collection(collection)
+                    .where('pet_friendly', '==', 'Y')
+                    .get()
+                    .then(allWaters => {
+                        allWaters.forEach(doc => {
+                            lat = doc.data().geo_point_2d.lat;
+                            lng = doc.data().geo_point_2d.lon;
+                            coordinates = [lng, lat];
+                            fountainName = doc.data().name;
+                            fountainLocation = doc.data().location;
+                            operation = doc.data().in_operation;
+
+                            // Pushes information into the features array
+                            features.push({
+                                'type': 'Feature',
+                                'properties': {
+                                    'description': `<strong>${fountainName}</strong><p>${fountainLocation}</p> <br> <a href="/content.html?docID=${doc.id}" target="_blank" title="Opens in a new window" style="color:blue;"">See more</a>`
+                                },
+                                'geometry': {
+                                    'type': 'Point',
+                                    'coordinates': coordinates
+                                }
+                            });
+                        });
+
+                        // Adds features as a source of data for the map
+                        map.addSource('places', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'FeatureCollection',
+                                'features': features
+                            }
+                        });
+
+                        // Creates a layer above the map displaying the pins
+                        // by using the sources that were just added
+                        map.addLayer({
+                            'id': 'places',
+                            'type': 'symbol',
+                            'source': 'places',
+                            'layout': {
+                                'icon-image': 'eventpin', // Pin Icon
+                                'icon-size': 0.1, // Pin Size
+                                'icon-allow-overlap': true // Allows icons to overlap
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error displaying map markers: ", error);
+                    });
+            }
+        );
+    });
 }

@@ -2,7 +2,7 @@ function showMap() {
 
   // Defines and initiates basic mapbox data
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
-  const map = new mapboxgl.Map({ // define mapbox data
+  const map = new mapboxgl.Map({
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
     center: [-123.1207, 49.2827], // Starting position [lng, lat]

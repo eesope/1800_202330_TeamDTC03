@@ -1,11 +1,11 @@
 // get user location with javacript
-var location_detector = document.getElementById("user_location");
+var location_detector = document.getElementById("detected_location");
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        console.log("Geolocation is not supported by this browser.")
+        alert("Geolocation is not supported by this browser.");
     }
 }
 

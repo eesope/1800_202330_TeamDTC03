@@ -52,6 +52,8 @@ function displayCardsDynamically(collection) {
                         newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
                     } else if (maintainer == "Engineering") {
                         newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                    } else {
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + docID + '.jpg';
                     }
                 }
                 newcard.querySelector('a').href = 'content.html?docID=' + docID;
