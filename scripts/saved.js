@@ -46,6 +46,8 @@ function getBookmarks(user) {
                     var details = doc.data().location; // get value of the "details" key
                     var pet_friendly = doc.data().pet_friendly;
                     var in_operation = doc.data().in_operation;
+                    var fountainImg = doc.data().photo_name;
+                    var maintainer = doc.data().maintainer;
 
 
                     //clone the new card
@@ -56,8 +58,18 @@ function getBookmarks(user) {
                     newcard.querySelector('.card-operation-open').innerHTML = "Operating time: " + in_operation;
                     newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                     newcard.querySelector('.card-text').innerHTML = details;
-                    newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
+                    // newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
+                    if (fountainImg) { // Check if fountainImg is not null or undefined
 
+                        // Conditionally set the image source based on maintainer
+                        if (maintainer == "parks") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
+                        } else if (maintainer == "Engineering") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                        } else {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + docID + '.jpg';
+                        }
+                    }
                     //Finally, attach this new card to the gallery
                     fountainCardGroup.appendChild(newcard);
                 })
