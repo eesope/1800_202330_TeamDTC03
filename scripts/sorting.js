@@ -225,19 +225,14 @@ function getLocation() {
         alert("Geolocation is not supported by this browser.");
     }
 }
-
+// show user location
 function showPosition(position) {
-    console.log(
-        "Latitude: " + position.coords.latitude +
-        "\nLongitude: " + position.coords.longitude
-    )
     const coordinates = [position.coords.longitude, position.coords.latitude];
+    console.log(coordinates)
     return coordinates
 }
 
-const userCoords = getLocation()
-
-const locations =
+function getWaters() {
     // READING information from db in Firestore
     db.collection('sample').get().then(allWaters => {
         const features = []; // Defines an empty array for information to be added to
@@ -247,16 +242,14 @@ const locations =
             lat = doc.data().geo_point_2d.lat;
             lng = doc.data().geo_point_2d.lon;
             coordinates = [lng, lat];
+            fountainName = doc.data().name;
+            fountainLocation = doc.data().location;
         })
 
-        features.push({
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Point',
-                'coordinates': coordinates
-            }
-        })
+        features.push({ coordinates })
+        console.log(features)
     })
+}
 
 const sortedLocations = by_distance(userCoordinates, locations);
 
