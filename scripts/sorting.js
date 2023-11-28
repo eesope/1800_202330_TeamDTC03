@@ -1,12 +1,8 @@
-
-
-
-
-function doAll() {
+function by_pet() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-            by_pet_friendly("vancouver_drinking_fountains");
+            by_pet_friendly("sample");
         } else {
             console.log("No user is signed in");
             window.location.href = "login.html";
@@ -18,19 +14,16 @@ function by_pet_friendly(collection) {
 
     console.log("by pet friendly called")
 
-    let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("waterCardTemplate");
+    // clear the current view
+    document.getElementById("vancouver_drinking_fountains-go-here").innerHTML = "";
 
-    let count = 0; //to show only limited locations
 
     db.collection(collection)
         .where('pet_friendly', '==', 'Y')
         .get()
         .then(allWaters => {
             allWaters.forEach(doc => {
-
-                if (count >= 3) {
-                    return;
-                }
 
                 var title = doc.data().name;
                 var details = doc.data().location;
@@ -54,6 +47,8 @@ function by_pet_friendly(collection) {
                         newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
                     } else if (maintainer == "Engineering") {
                         newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                    } else {
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + docID + '.jpg';
                     }
                 }
                 newcard.querySelector('a').href = 'content.html?docID=' + docID;
@@ -62,17 +57,15 @@ function by_pet_friendly(collection) {
                 newcard.querySelector('i').onclick = () => updateBookmark(docID);
 
                 currentUser.get().then(userDoc => {
-                    //get the user name
                     var bookmarks = userDoc.data().bookmarks;
                     if (bookmarks.includes(docID)) {
                         document.getElementById('save-' + docID).innerText = 'bookmark';
                     }
                 })
 
-                document.getElementById(collection + "-go-here").innerHTML = "";
-                document.getElementById(collection + "-go-here").appendChild(newcard);
+                console.log(allWaters)
 
-                count++;
+                document.getElementById("vancouver_drinking_fountains-go-here").appendChild(newcard);
             })
         })
         .catch(error => {
