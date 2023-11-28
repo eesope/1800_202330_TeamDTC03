@@ -63,10 +63,13 @@
     <div id="top_main">
         <div id="current_location" class="d-flex justify-content-between">
             <div id="user_location" class="d-flex">
-                <button onclick="getLocation()"><i id="my_location_icon" class="material-icons">my_location</i>
-                </button>
+                <i id="my_location_icon" class="material-icons">my_location</i>
+                <div class="flex-fill" style="margin-left: 10px;"> <span id="detected_location">
+                        Location detecting...
+                    </span> </div>
             </div>
             <div id="show_location"></div>
+            <br>
 
             <div class="dropdown">
                 Sorted by:

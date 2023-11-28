@@ -4,6 +4,9 @@ function by_pet() {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
             by_pet_friendly("sample");
+
+            // update the dropdown button 
+            document.getElementById('sorting').innerText = 'Pet-friendly';
         } else {
             console.log("No user is signed in");
             window.location.href = "login.html";
@@ -61,9 +64,6 @@ function by_pet_friendly(collection) {
                         document.getElementById('save-' + docID).innerText = 'bookmark';
                     }
                 })
-
-                console.log(allWaters)
-
                 document.getElementById("vancouver_drinking_fountains-go-here").appendChild(newcard);
             })
         })

@@ -135,6 +135,7 @@ function showMap() {
         // Adds user's current location as a source to the map
         navigator.geolocation.getCurrentPosition(position => {
           const userLocation = [position.coords.longitude, position.coords.latitude];
+
           console.log("user location from line138", userLocation);
 
           if (userLocation) {
@@ -221,11 +222,9 @@ function showMap() {
   });
   map.addControl(geocoder);
 
-  // Listen for the 'result' event from the geocoder (when a search is made)
+  // Listen for searching from the geocoder
   geocoder.on('result', function (e) {
     searchLocation = e.result.geometry.coordinates;
-    console.log("user location on geocoder: ", userLocation);
-    console.log("search location on geocoder: ", searchLocation);
 
     // Add a marker to the map at the search location
     searchLocationMarker && searchLocationMarker.remove(); // Remove the previous search marker if it exists
