@@ -136,8 +136,6 @@ function showMap() {
         navigator.geolocation.getCurrentPosition(position => {
           const userLocation = [position.coords.longitude, position.coords.latitude];
 
-          console.log("user location from line138", userLocation);
-
           if (userLocation) {
             map.addSource('userLocation', {
               'type': 'geojson',

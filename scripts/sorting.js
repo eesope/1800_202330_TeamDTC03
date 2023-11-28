@@ -178,3 +178,85 @@ function map_by_pet_friendly(collection) {
         );
     });
 }
+
+
+// calculate distance by pythagoras formula
+function calculateDistance(userCoords, locationCoords) {
+    const R = 6371; // Radius of the Earth in kilometers
+    const lat1 = userCoords[1];
+    const lon1 = userCoords[0];
+    const lat2 = locationCoords[1];
+    const lon2 = locationCoords[0];
+
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    // result on Earth in km
+    const distance = R * c;
+    return distance;
+}
+
+function by_distance(userCoords, locations) {
+    return locations.sort((location1, location2) => {
+        const distance1 = calculateDistance(userCoords, [location1.longitude, location1.latitude]);
+        const distance2 = calculateDistance(userCoords, [location2.longitude, location2.latitude]);
+
+        return distance1 - distance2;
+    });
+}
+
+// get user location with javascript
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation
+            .getCurrentPosition(showPosition,
+                error => {
+                    console.error("Error getting location:", error);
+                    alert("Error getting location: access not allowed.");
+                })
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    console.log(
+        "Latitude: " + position.coords.latitude +
+        "\nLongitude: " + position.coords.longitude
+    )
+    const coordinates = [position.coords.longitude, position.coords.latitude];
+    return coordinates
+}
+
+const userCoords = getLocation()
+
+const locations =
+    // READING information from db in Firestore
+    db.collection('sample').get().then(allWaters => {
+        const features = []; // Defines an empty array for information to be added to
+
+        allWaters.forEach(doc => {
+
+            lat = doc.data().geo_point_2d.lat;
+            lng = doc.data().geo_point_2d.lon;
+            coordinates = [lng, lat];
+        })
+
+        features.push({
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': coordinates
+            }
+        })
+    })
+
+const sortedLocations = by_distance(userCoordinates, locations);
+

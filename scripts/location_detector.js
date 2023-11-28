@@ -1,4 +1,4 @@
-// get user location with javacript
+// get user location with javascript
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation
