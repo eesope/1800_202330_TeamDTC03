@@ -178,3 +178,131 @@ function map_by_pet_friendly(collection) {
         );
     });
 }
+
+
+// calculate distance by pythagoras formula
+function calculateDistance(userCoords, locationCoords) {
+    const R = 6371; // Radius of the Earth in kilometers
+    const lat1 = userCoords[1];
+    const lon1 = userCoords[0];
+    const lat2 = locationCoords[1];
+    const lon2 = locationCoords[0];
+
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    // result on Earth in km
+    const distance = R * c;
+    return distance;
+}
+
+function by_distance(userCoords, locations) {
+    return locations.sort((location1, location2) => {
+        const distance1 = calculateDistance(userCoords, [location1.longitude, location1.latitude]);
+        const distance2 = calculateDistance(userCoords, [location2.longitude, location2.latitude]);
+        return distance1 - distance2;
+    });
+}
+
+// get user location with javascript
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation
+            .getCurrentPosition(showPosition,
+                error => {
+                    console.error("Error getting location:", error);
+                    alert("Error getting location: access not allowed.");
+                })
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+// show user location
+function showPosition(position) {
+    const coordinates = [position.coords.longitude, position.coords.latitude];
+    console.log(coordinates)
+    return coordinates
+}
+
+function displayByDistance(collection) {
+    let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
+
+    // Get user's location
+    navigator.geolocation.getCurrentPosition(position => {
+        const userCoords = [position.coords.longitude, position.coords.latitude];
+
+        document.getElementById("vancouver_drinking_fountains-go-here").innerHTML = "";
+
+        db.collection(collection).get()
+            .then(allWaters => {
+                // write in array
+                const locations = [];
+
+                allWaters.forEach(doc => {
+                    const lat = doc.data().geo_point_2d.lat;
+                    const lng = doc.data().geo_point_2d.lon;
+                    const coordinates = [lng, lat];
+
+                    locations.push({
+                        coordinates,
+                        fountainName: doc.data().name,
+                        fountainLocation: doc.data().location,
+                        petFriendly: doc.data().pet_friendly,
+                        inOperation: doc.data().in_operation,
+                        fountainImg: doc.data().photo_name,
+                        maintainer: doc.data().maintainer,
+                        docID: doc.id
+                    });
+                });
+
+                // Sort locations by distance
+                const sortedLocations = by_distance(userCoords, locations);
+
+                // Display sorted locations
+                sortedLocations.forEach(location => {
+                    const newcard = cardTemplate.content.cloneNode(true);
+
+                    // Update title and text and image using properties from the location object
+                    newcard.querySelector('.card-title').innerHTML = location.fountainName;
+                    newcard.querySelector('.card-operation-open').innerHTML = "Operating time: " + location.inOperation;
+                    newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + location.petFriendly;
+                    newcard.querySelector('.card-text').innerHTML = location.fountainLocation;
+
+                    if (location.fountainImg) { // Check if fountainImg is not null or undefined
+                        // Conditionally set the image source based on maintainer
+                        if (location.maintainer == "parks") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + location.fountainImg;
+                        } else if (location.maintainer == "Engineering") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + location.fountainImg;
+                        } else {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + location.docID + '.jpg';
+                        }
+                    }
+
+                    newcard.querySelector('a').href = 'content.html?docID=' + location.docID;
+
+                    newcard.querySelector('i').id = 'save-' + location.docID; // for assigning unique id to each save button
+                    newcard.querySelector('i').onclick = () => updateBookmark(location.docID);
+
+                    currentUser.get().then(userDoc => {
+                        //get the user name
+                        var bookmarks = userDoc.data().bookmarks;
+                        if (bookmarks.includes(location.docID)) {
+                            document.getElementById('save-' + location.docID).innerText = 'bookmark';
+                        }
+                    })
+                    document.getElementById("vancouver_drinking_fountains-go-here").appendChild(newcard);
+                });
+            })
+            .catch(error => {
+                console.error('Error displaying cards:', error);
+            });
+    });
+}
