@@ -54,17 +54,21 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
+    <div class="back-btn">
+        <a class="btn back-btn btn-lg" style="background-color: #0b75af" href="main_list.html" role="button"><span
+                class="material-symbols-outlined">arrow_back</span></a>
+    </div>
     <div class="card">
-        <div class="back-btn">
-            <a class="btn back-btn btn-lg" style="background-color: #555" href="main_list.html" role="button"><span
-                    class="material-symbols-outlined">arrow_back</span></a>
-        </div>
         <div class="card-body">
             <h1 class="display-4">Hi, <span id="name-goes-here"></span></h1>
-            <p class="card-text">You have saved <span id="countValue" class="highlighted">0</span> plastic bottles with
+            <p class="card-text">You have saved <button class="btn btn-success btn-lg" onclick="refill()"><span
+                        class="material-symbols-outlined">
+                        add
+                    </span></button><span id="countValue" class="highlighted">0</span><button
+                    class="btn btn-danger btn-lg" onclick="undo()"><span class="material-symbols-outlined">
+                        remove
+                    </span></button> plastic bottles with
                 VanWater!</p>
-            <button class="btn btn-success btn-lg" onclick="refill()">Log Refill</button>
-            <button class="btn btn-danger btn-lg" onclick="undo()">Unlog Refill</button>
         </div>
         <br>
         <br>

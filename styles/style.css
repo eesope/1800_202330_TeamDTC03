@@ -7,6 +7,16 @@
     background-color: #0f71fa !important;
 }
 
+.btn-success{
+    background-color: #0f71fa !important;
+    border: none !important;
+}
+
+.btn-danger {
+    background-color: #6c757d !important;
+    border: none !important;
+}
+
 * {
     font-family: 'Josefin Sans', sans-serif;
     font-family: 'Young Serif', serif;
@@ -34,7 +44,7 @@
     left: 12%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    background-color: #555;
+    background-color: #0b75af;
     color: white;
     font-size: 20px;
     padding: 12px 24px;
@@ -46,7 +56,7 @@
 
 .container .btn:hover {
     background-color: whitesmoke;
-    color: black;
+    color: #0b75af;
 }
 
 #list_see_more:hover {
@@ -123,7 +133,9 @@ h4 {
 
 .highlighted {
     font-weight: bold;
-    color: #4511d3;
+    color: #0b75af;
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 
