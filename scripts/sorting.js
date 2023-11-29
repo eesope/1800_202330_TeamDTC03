@@ -207,7 +207,6 @@ function by_distance(userCoords, locations) {
     return locations.sort((location1, location2) => {
         const distance1 = calculateDistance(userCoords, [location1.longitude, location1.latitude]);
         const distance2 = calculateDistance(userCoords, [location2.longitude, location2.latitude]);
-
         return distance1 - distance2;
     });
 }
@@ -232,24 +231,78 @@ function showPosition(position) {
     return coordinates
 }
 
-function getWaters() {
-    // READING information from db in Firestore
-    db.collection('sample').get().then(allWaters => {
-        const features = []; // Defines an empty array for information to be added to
+function displayByDistance(collection) {
+    let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
 
-        allWaters.forEach(doc => {
+    // Get user's location
+    navigator.geolocation.getCurrentPosition(position => {
+        const userCoords = [position.coords.longitude, position.coords.latitude];
 
-            lat = doc.data().geo_point_2d.lat;
-            lng = doc.data().geo_point_2d.lon;
-            coordinates = [lng, lat];
-            fountainName = doc.data().name;
-            fountainLocation = doc.data().location;
-        })
+        document.getElementById("vancouver_drinking_fountains-go-here").innerHTML = "";
 
-        features.push({ coordinates })
-        console.log(features)
-    })
+        db.collection(collection).get()
+            .then(allWaters => {
+                // write in array
+                const locations = [];
+
+                allWaters.forEach(doc => {
+                    const lat = doc.data().geo_point_2d.lat;
+                    const lng = doc.data().geo_point_2d.lon;
+                    const coordinates = [lng, lat];
+
+                    locations.push({
+                        coordinates,
+                        fountainName: doc.data().name,
+                        fountainLocation: doc.data().location,
+                        petFriendly: doc.data().pet_friendly,
+                        inOperation: doc.data().in_operation,
+                        fountainImg: doc.data().photo_name,
+                        maintainer: doc.data().maintainer,
+                        docID: doc.id
+                    });
+                });
+
+                // Sort locations by distance
+                const sortedLocations = by_distance(userCoords, locations);
+
+                // Display sorted locations
+                sortedLocations.forEach(location => {
+                    const newcard = cardTemplate.content.cloneNode(true);
+
+                    // Update title and text and image using properties from the location object
+                    newcard.querySelector('.card-title').innerHTML = location.fountainName;
+                    newcard.querySelector('.card-operation-open').innerHTML = "Operating time: " + location.inOperation;
+                    newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + location.petFriendly;
+                    newcard.querySelector('.card-text').innerHTML = location.fountainLocation;
+
+                    if (location.fountainImg) { // Check if fountainImg is not null or undefined
+                        // Conditionally set the image source based on maintainer
+                        if (location.maintainer == "parks") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + location.fountainImg;
+                        } else if (location.maintainer == "Engineering") {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + location.fountainImg;
+                        } else {
+                            newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + location.docID + '.jpg';
+                        }
+                    }
+
+                    newcard.querySelector('a').href = 'content.html?docID=' + location.docID;
+
+                    newcard.querySelector('i').id = 'save-' + location.docID; // for assigning unique id to each save button
+                    newcard.querySelector('i').onclick = () => updateBookmark(location.docID);
+
+                    currentUser.get().then(userDoc => {
+                        //get the user name
+                        var bookmarks = userDoc.data().bookmarks;
+                        if (bookmarks.includes(location.docID)) {
+                            document.getElementById('save-' + location.docID).innerText = 'bookmark';
+                        }
+                    })
+                    document.getElementById("vancouver_drinking_fountains-go-here").appendChild(newcard);
+                });
+            })
+            .catch(error => {
+                console.error('Error displaying cards:', error);
+            });
+    });
 }
-
-const sortedLocations = by_distance(userCoordinates, locations);
-
