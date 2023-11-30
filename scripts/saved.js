@@ -48,7 +48,7 @@ function getBookmarks(user) {
                     var in_operation = doc.data().in_operation;
                     var fountainImg = doc.data().photo_name;
                     var maintainer = doc.data().maintainer;
-
+                    var docID = doc.id;
 
                     //clone the new card
                     let newcard = newcardTemplate.content.cloneNode(true);
@@ -58,9 +58,9 @@ function getBookmarks(user) {
                     newcard.querySelector('.card-operation-open').innerHTML = "Operating time: " + in_operation;
                     newcard.querySelector('.card-operation-pet').innerHTML = "Pet friendly: " + pet_friendly;
                     newcard.querySelector('.card-text').innerHTML = details;
-                    // newcard.querySelector('.card-image').src = `./images/water_fountain.jpg`; //Example: NV01.jpg
-                    if (fountainImg) { // Check if fountainImg is not null or undefined
+                    newcard.querySelector('a').href = 'content.html?docID=' + docID;
 
+                    if (fountainImg) { // Check if fountainImg is not null or undefined
                         // Conditionally set the image source based on maintainer
                         if (maintainer == "parks") {
                             newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
