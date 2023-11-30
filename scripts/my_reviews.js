@@ -17,9 +17,6 @@ function populateReviews() {
                 var description = doc.data().description;
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
-                console.log(rating);
-
-                console.log(time);
 
                 let reviewCard = water_fountain_CardTemplate.content.cloneNode(true);
                 reviewCard.querySelector(".fountain-name").innerHTML = water_fountainName;
@@ -43,9 +40,55 @@ function populateReviews() {
                 }
                 reviewCard.querySelector(".star-rating").innerHTML = starRating;
 
+                reviewCard.querySelector('#delete-icon').onclick = () => deleteReview(doc.id);
                 water_fountain_Group.appendChild(reviewCard);
             });
         });
 }
 
 populateReviews();
+
+function deleteReview(postid) {
+    var result = confirm("Want to delete?");
+    if (result) {
+        //Logic to delete the item
+        db.collection("reviews").doc(postid)
+            .delete()
+            .then(() => {
+                console.log("1. Document deleted from Posts collection");
+                deleteFromMyReviews(postid);
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+    }
+}
+
+function deleteFromMyReviews(postid) {
+    firebase.auth().onAuthStateChanged(user => {
+        db.collection("users").doc(user.uid).update({
+            myposts: firebase.firestore.FieldValue.arrayRemove(postid)
+        })
+            .then(() => {
+                console.log("2. post deleted from user doc");
+                deleteFromStorage(postid);
+            })
+    })
+}
+
+function deleteFromStorage(postid) {
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+
+    // Create a reference to the file to delete
+    var imageRef = storageRef.child('images/' + postid + '.jpg');
+
+    // Delete the file
+    imageRef.delete().then(() => {
+        // File deleted successfully
+        console.log("3. image deleted from storage");
+        alert("DELETE is completed!");
+        location.reload();
+    }).catch((error) => {
+        //Error occurred!
+    });
+}
