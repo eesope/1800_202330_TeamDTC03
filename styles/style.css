@@ -164,3 +164,8 @@ h4 {
 #fountainCardGroup {
     margin-bottom: 150px;
 }
+
+#copy_button{
+    border: none;
+    background-color: white;
+}

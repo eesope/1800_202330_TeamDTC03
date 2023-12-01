@@ -204,9 +204,10 @@ function calculateDistance(userCoords, locationCoords) {
 }
 
 function by_distance(userCoords, locations) {
+    console.log("by_distance called")
     return locations.sort((location1, location2) => {
-        const distance1 = calculateDistance(userCoords, [location1.longitude, location1.latitude]);
-        const distance2 = calculateDistance(userCoords, [location2.longitude, location2.latitude]);
+        const distance1 = calculateDistance(userCoords, [location1.coordinates[0], location1.coordinates[1]]);
+        const distance2 = calculateDistance(userCoords, [location2.coordinates[0], location2.coordinates[1]]);
         return distance1 - distance2;
     });
 }

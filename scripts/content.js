@@ -9,8 +9,7 @@ function displayWaterInfo() {
             thisWater = doc.data()
             waterCode = thisWater.code;
             waterName = doc.data().name;
-            document.getElementById("waterName").innerHTML = waterName +
-                `<button onclick="copyClipboard()" id="copy_button"><span class="material-symbols-outlined">content_copy</span></button>`;
+            document.getElementById("waterName").innerHTML = waterName
         }
 
         );
@@ -19,18 +18,22 @@ function displayWaterInfo() {
 displayWaterInfo();
 
 function copyClipboard() {
-    // Get the text field
-    var copyText = document.getElementById("waterName");
+    // get the text field
+    var copyText = document.getElementById("waterName").innerText;
 
-    // Select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
+    // create a new clipboardItem
+    const clipboardItem = new ClipboardItem({ "text/plain": new Blob([copyText], { type: "text/plain" }) });
 
-    // Copy the text inside the text field
-    navigator.clipboard.writeText(copyText.value);
-
-    // Alert the copied text
-    alert("Copied the text: " + copyText.value);
+    // write clipboardItem to clipboard
+    navigator.clipboard.write([clipboardItem])
+        .then(
+            function () {
+                alert("Copied the text: " + copyText);
+            },
+            function (err) {
+                console.error("Copy failed: ", err);
+            }
+        );
 }
 
 function saveWaterFountainDocumentIDAndRedirect() {
@@ -110,7 +113,7 @@ function displayImage() {
         return;
     }
 
-    const docRef = db.collection('vancouver_drinking_fountains').doc(docID);
+    const docRef = db.collection("vancouver_drinking_fountains").doc(docID);
 
     docRef.get()
         .then(doc => {
@@ -120,10 +123,16 @@ function displayImage() {
                 const maintainer = data.maintainer;
                 let imgUrl = '';
 
-                if (maintainer === "parks") {
-                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
-                } else if (maintainer === "Engineering") {
-                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                if (fountainImg) { // Check if fountainImg is not null or undefined
+
+                    // Conditionally set the image source based on maintainer
+                    if (maintainer == "parks") {
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
+                    } else if (maintainer == "Engineering") {
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                    } else {
+                        newcard.querySelector('.card-image').src = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + docID + '.jpg';
+                    }
                 }
 
                 const imageElement = document.getElementById('fountainImage');
