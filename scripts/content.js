@@ -3,19 +3,35 @@ function displayWaterInfo() {
     let ID = params.searchParams.get("docID"); //get value for key "docID"
 
     db.collection("vancouver_drinking_fountains")
-    .doc(ID)
-    .get()
-    .then(doc => {
-        thisWater = doc.data()
-        waterCode = thisWater.code;
-        waterName = doc.data().name;
-        document.getElementById("waterName").innerHTML = waterName;
-    }
+        .doc(ID)
+        .get()
+        .then(doc => {
+            thisWater = doc.data()
+            waterCode = thisWater.code;
+            waterName = doc.data().name;
+            document.getElementById("waterName").innerHTML = waterName +
+                `<button onclick="copyClipboard()" id="copy_button"><span class="material-symbols-outlined">content_copy</span></button>`;
+        }
 
-    );
+        );
 }
 
 displayWaterInfo();
+
+function copyClipboard() {
+    // Get the text field
+    var copyText = document.getElementById("waterName");
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    // Alert the copied text
+    alert("Copied the text: " + copyText.value);
+}
 
 function saveWaterFountainDocumentIDAndRedirect() {
     let params = new URL(window.location.href); //get url of search bar
@@ -69,9 +85,9 @@ function populateReviews() {
                 reviewCard.querySelector(".star-rating").innerHTML = starRating;
 
                 if (photoUrl) {
-                    let imgElement = reviewCard.querySelector("img"); 
+                    let imgElement = reviewCard.querySelector("img");
                     imgElement.src = photoUrl;
-                    imgElement.alt = "User uploaded image"; 
+                    imgElement.alt = "User uploaded image";
                 }
 
                 water_fountain_Group.appendChild(reviewCard);
