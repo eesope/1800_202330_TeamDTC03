@@ -18,22 +18,33 @@ function displayWaterInfo() {
 displayWaterInfo();
 
 function copyClipboard() {
-    // get the text field
-    var copyText = document.getElementById("waterName").innerText;
+    let params = new URL(window.location.href);
+    let ID = params.searchParams.get("docID");
 
-    // create a new clipboardItem
-    const clipboardItem = new ClipboardItem({ "text/plain": new Blob([copyText], { type: "text/plain" }) });
+    // let user copy coordinate of location instead of name
+    db.collection("vancouver_drinking_fountains")
+        .doc(ID)
+        .get()
+        .then(async (doc) => {  // wait for read data
+            thisWater = doc.data()
+            lng = thisWater.geom.geometry.coordinates[0];
+            lat = thisWater.geom.geometry.coordinates[1];
+            waterCoord = `${lng}, ${lat}`;
+            console.log(waterCoord)
 
-    // write clipboardItem to clipboard
-    navigator.clipboard.write([clipboardItem])
-        .then(
-            function () {
-                alert("Copied the text: " + copyText);
-            },
-            function (err) {
+            // create a new clipboardItem
+            const clipboardItem = new ClipboardItem({
+                "text/plain": new Blob([waterCoord], { type: "text/plain" })
+            });
+
+            // write clipboardItem to clipboard
+            try {
+                await navigator.clipboard.write([clipboardItem])
+                alert("Fountain location is copied: " + waterCode);
+            } catch (err) {
                 console.error("Copy failed: ", err);
             }
-        );
+        });
 }
 
 function saveWaterFountainDocumentIDAndRedirect() {
