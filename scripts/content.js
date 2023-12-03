@@ -30,7 +30,6 @@ function copyClipboard() {
             lng = thisWater.geom.geometry.coordinates[0];
             lat = thisWater.geom.geometry.coordinates[1];
             waterCoord = `${lng}, ${lat}`;
-            console.log(waterCoord)
 
             // create a new clipboardItem
             const clipboardItem = new ClipboardItem({
@@ -40,7 +39,7 @@ function copyClipboard() {
             // write clipboardItem to clipboard
             try {
                 await navigator.clipboard.write([clipboardItem])
-                alert("Fountain location is copied: " + waterCode);
+                alert("Fountain location is copied: " + waterCoord);
             } catch (err) {
                 console.error("Copy failed: ", err);
             }
@@ -73,9 +72,6 @@ function populateReviews() {
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
                 var photoUrl = doc.data().image;
-                console.log(rating);
-
-                console.log(time);
 
                 let reviewCard = water_fountain_CardTemplate.content.cloneNode(true);
                 reviewCard.querySelector(".title").innerHTML = title;

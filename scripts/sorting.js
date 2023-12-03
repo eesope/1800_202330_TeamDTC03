@@ -1,9 +1,9 @@
 // for list page
-function by_pet() {
+function byPet() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-            by_pet_friendly("sample");
+            byPetFriendly("sample");
 
             // update the dropdown button 
             document.getElementById('sorting').innerText = 'Pet-friendly';
@@ -15,7 +15,7 @@ function by_pet() {
 }
 
 // filter pet friendly fountains and show it on list page
-function by_pet_friendly(collection) {
+function byPetFriendly(collection) {
     let cardTemplate = document.getElementById("waterCardTemplate");
     // clear the current view
     document.getElementById("vancouver_drinking_fountains-go-here").innerHTML = "";
@@ -73,11 +73,11 @@ function by_pet_friendly(collection) {
 }
 
 // for map page
-function map_by_pet() {
+function mapByPet() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-            map_by_pet_friendly("sample");
+            mapByPetFriendly("sample");
         } else {
             console.log("No user is signed in");
             window.location.href = "login.html";
@@ -86,7 +86,10 @@ function map_by_pet() {
 }
 
 // filter pet friendly fountains and show it on map
-function map_by_pet_friendly(collection) {
+function mapByPetFriendly(collection) {
+
+    // update sorting dropdown button
+    document.getElementById('sorting').innerText = 'Pet-friendly';
 
     // clear map div
     document.getElementById("map").innerHTML = "";
@@ -203,7 +206,7 @@ function calculateDistance(userCoords, locationCoords) {
     return distance;
 }
 
-function by_distance(userCoords, locations) {
+function byDistance(userCoords, locations) {
     console.log("by_distance called")
     return locations.sort((location1, location2) => {
         const distance1 = calculateDistance(userCoords, [location1.coordinates[0], location1.coordinates[1]]);
@@ -264,7 +267,7 @@ function displayByDistance(collection) {
                 });
 
                 // Sort locations by distance
-                const sortedLocations = by_distance(userCoords, locations);
+                const sortedLocations = byDistance(userCoords, locations);
 
                 // Display sorted locations
                 sortedLocations.forEach(location => {

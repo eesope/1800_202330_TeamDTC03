@@ -193,7 +193,6 @@ function showMap() {
   });
 
   // declare some globally used variables
-  var userLocationMarker;
   var searchLocationMarker;
   var userLocation;
   var searchLocation;
