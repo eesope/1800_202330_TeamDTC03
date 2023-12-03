@@ -1,24 +1,22 @@
 # Project Title
+VanWater
 
 ## 1. Project Description
 State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
 This browser based web application to ... 
 
 ## 2. Names of Contributors
-List team members and/or short bio's here... 
 * Hi, My name is Saeyoung! I am excited to start this journey of creating a web application.
 * Hi, my name is Tony! I am excited to do this project because I love to make this city smarter with tech.
 * Hi, my name is Ella!I am excited to start this project! I hope this project turns out wonderful!
 	
 ## 3. Technologies and Resources Used
-List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
 * HTML, CSS, JavaScript
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
 * From the city of Vancouver: photo, location, water quality, general information of drinking fountains 
-* From Mapbox: map API, map css
+* From Mapbox: map API, map css, navigation
 * From Google Fonts: fonts, icons
-* 
 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
@@ -77,6 +75,29 @@ It has the following subfolders and files:
     /nav_after_login.html    # navigation bar after a user login
     /nav_before_login.html   # navigation bar before a user login
 
+Firebase hosting files: 
+├── .firebase
+	/hosting..cache
+├── .firebaserc
+├── 404.html
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── storage.rules
+
 ```
 
+## 8. Limitations
+- Loading time in view change between map and list
+- Loading time in showing result from sorting feature
 
+## 9. Contact 
+* Saeyoung Park - spark363@my.bcit.ca 
+* Tony Lai - @my.bcit.ca
+* Ella Song - @my.bcit.ca
+
+## Acknowledgements 
+* <a href="https://fonts.google.com/">Google Fonts</a>
+* <a href="https://getbootstrap.com/">Bootstrap</a>
+* <a href="https://mapbox.com/">Mapbox</a>
+* <a href="https://opendata.vancouver.ca/explore/dataset/drinking-fountains/information/?disjunctive.geo_local_area">Open data from City of Vancouver (Drinking Fountain)</a>
