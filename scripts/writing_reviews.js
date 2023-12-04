@@ -1,19 +1,18 @@
 var water_fountainID = localStorage.getItem('water_fountainID');
-
 function displayWater_fountainName() {
-    db.collection('vancouver_drinking_fountains').doc(water_fountainID).get().then( (thisWater_fountain)=>{
+    db.collection('vancouver_drinking_fountains').doc(water_fountainID).get().then((thisWater_fountain) => {
         water_fountainName = thisWater_fountain.data().location;
         document.getElementById("water_fountain_Name").innerHTML = water_fountainName;
     })
-
 }
 displayWater_fountainName()
+
 
 var ImageFile;
 function listenFileSelect() {
     // listen for file selection
-    var fileInput = document.getElementById("mypic-input"); // pointer #1
-    const image = document.getElementById("mypic-goes-here"); // pointer #2
+    var fileInput = document.getElementById("mypic-input");
+    const image = document.getElementById("mypic-goes-here");
 
     // When a change happens to the File Chooser Input
     fileInput.addEventListener('change', function (e) {
@@ -25,16 +24,6 @@ function listenFileSelect() {
 listenFileSelect();
 
 
-
-//------------------------------------------------
-// So, a new post document has just been added
-// and it contains a bunch of fields.
-// We want to store the image associated with this post,
-// such that the image name is the postid (guaranteed unique).
-// 
-// This function is called AFTER the post has been created, 
-// and we know the post's document id.
-//------------------------------------------------
 function uploadPic(postDocID) {
     return new Promise((resolve, reject) => {
         console.log("inside uploadPic " + postDocID);
@@ -74,7 +63,6 @@ function savePostIDforUser(postDocID) {
             .then(() => {
                 console.log("5. Saved to user's document!");
                 alert("Post is complete!");
-                //window.location.href = "showposts.html";
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
@@ -82,8 +70,6 @@ function savePostIDforUser(postDocID) {
     })
 }
 
-
-// Add this JavaScript code to make stars clickable
 
 // Select all elements with the class name "star" and store them in the "stars" variable
 const stars = document.querySelectorAll('.star');
@@ -103,6 +89,7 @@ stars.forEach((star, index) => {
     });
 });
 
+
 function savePost() {
     console.log("inside write review");
     let water_fountain_Title = document.getElementById("title").value;
@@ -111,18 +98,17 @@ function savePost() {
     // Get the star rating
     // Get all the elements with the class "star" and store them in the 'stars' variable
     const stars = document.querySelectorAll('.star');
-    // Initialize a variable 'hikeRating' to keep track of the rating count
+    // Initialize a variable 'water_fountain_Rating' to keep track of the rating count
     let water_fountain_Rating = 0;
-    // Iterate through each element in the 'stars' NodeList using the forEach method
+    // Iterate through each element in the 'stars' using the forEach method
     stars.forEach((star) => {
         // Check if the text content of the current 'star' element is equal to the string 'star'
         if (star.textContent === 'star') {
-            // If the condition is met, increment the 'hikeRating' by 1
+            // If the condition is met, increment the 'water_fountain_Rating' by 1
             water_fountain_Rating++;
         }
     });
 
-    console.log(water_fountain_Title, water_fountain_Description, water_fountain_Rating);
 
     var user = firebase.auth().currentUser;
     if (user) {
