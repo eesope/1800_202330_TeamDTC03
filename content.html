@@ -48,7 +48,7 @@
 <body>
     <!-- stuff -->
     <div class="back-btn">
-        <a class="btn back-btn btn-lg" style="background-color: grey" href="main_list.html" role="button"><span
+        <a class="btn back-btn btn-lg" style="background-color: #0f71fa; color: white;" href="main_list.html" role="button"><span
                 class="material-symbols-outlined">arrow_back</span></a>
     </div>
     <!-- Templates for general use, not displayed -->
@@ -58,7 +58,7 @@
     </div>
 
     </div>
-    <div class="d-grid gap-2">
+    <div class="card py-1 mx-1" style="width: 95%; border: none;">
         <button id="write_review_button" class="btn btn-primary mb-3"
             onclick="saveWaterFountainDocumentIDAndRedirect()">Write
             Review</button>
@@ -68,7 +68,11 @@
         <div class="info">
             <div class="container">
 
-                <h3><span id="waterName">Fountain name</span></h3>
+                <h3><span id="waterName">Fountain name</span>
+                    <button onclick="copyClipboard()" id="copy_button">
+                        <span class="material-symbols-outlined">content_copy</span></button>
+                </h3>
+
                 <h2>Reviews:</h2>
                 <div id="details-go-here"></div>
                 <!-- Here is the container for cards with horizontal scrolling -->
@@ -95,8 +99,7 @@
             </template>
 
             <div>
-                <div class="container mt-3"></div>
-                <div class="water-quality-table">
+                <div class="water-quality-table container mt-3">
                     <h4>Water quality</h4>
                     <a href="water_quality.html">Learn more</a>
                 </div>

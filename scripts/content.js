@@ -9,8 +9,7 @@ function displayWaterInfo() {
             thisWater = doc.data()
             waterCode = thisWater.code;
             waterName = doc.data().name;
-            document.getElementById("waterName").innerHTML = waterName +
-                `<button onclick="copyClipboard()" id="copy_button"><span class="material-symbols-outlined">content_copy</span></button>`;
+            document.getElementById("waterName").innerHTML = waterName
         }
 
         );
@@ -19,18 +18,32 @@ function displayWaterInfo() {
 displayWaterInfo();
 
 function copyClipboard() {
-    // Get the text field
-    var copyText = document.getElementById("waterName");
+    let params = new URL(window.location.href);
+    let ID = params.searchParams.get("docID");
 
-    // Select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
+    // let user copy coordinate of location instead of name
+    db.collection("vancouver_drinking_fountains")
+        .doc(ID)
+        .get()
+        .then(async (doc) => {  // wait for read data
+            thisWater = doc.data()
+            lng = thisWater.geom.geometry.coordinates[0];
+            lat = thisWater.geom.geometry.coordinates[1];
+            waterCoord = `${lng}, ${lat}`;
 
-    // Copy the text inside the text field
-    navigator.clipboard.writeText(copyText.value);
+            // create a new clipboardItem
+            const clipboardItem = new ClipboardItem({
+                "text/plain": new Blob([waterCoord], { type: "text/plain" })
+            });
 
-    // Alert the copied text
-    alert("Copied the text: " + copyText.value);
+            // write clipboardItem to clipboard
+            try {
+                await navigator.clipboard.write([clipboardItem])
+                alert("Fountain location is copied: " + waterCoord);
+            } catch (err) {
+                console.error("Copy failed: ", err);
+            }
+        });
 }
 
 function saveWaterFountainDocumentIDAndRedirect() {
@@ -59,9 +72,6 @@ function populateReviews() {
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
                 var photoUrl = doc.data().image;
-                console.log(rating);
-
-                console.log(time);
 
                 let reviewCard = water_fountain_CardTemplate.content.cloneNode(true);
                 reviewCard.querySelector(".title").innerHTML = title;
@@ -110,7 +120,7 @@ function displayImage() {
         return;
     }
 
-    const docRef = db.collection('vancouver_drinking_fountains').doc(docID);
+    const docRef = db.collection("vancouver_drinking_fountains").doc(docID);
 
     docRef.get()
         .then(doc => {
@@ -120,10 +130,16 @@ function displayImage() {
                 const maintainer = data.maintainer;
                 let imgUrl = '';
 
-                if (maintainer === "parks") {
-                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
-                } else if (maintainer === "Engineering") {
-                    imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                if (fountainImg) { // Check if fountainImg is not null or undefined
+
+                    // Conditionally set the image source based on maintainer
+                    if (maintainer == "parks") {
+                        imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + fountainImg;
+                    } else if (maintainer == "Engineering") {
+                        imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/eng/' + fountainImg;
+                    } else {
+                        imgUrl = 'http://vanmapp1.vancouver.ca/photo/drinking_fountains/parks/' + docID + '.jpg';
+                    }
                 }
 
                 const imageElement = document.getElementById('fountainImage');

@@ -40,7 +40,6 @@
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
     <!-- Load Mapbox libraries -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
@@ -52,7 +51,6 @@
     <link rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
         type="text/css">
-
 </head>
 
 <body>
@@ -73,13 +71,13 @@
 
             <div class="dropdown">
                 Sorted by:
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button id="sorting" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Distance
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark" style="overflow: visible;">
-                    <li><a class="dropdown-item" id="by_distance" onclick="map_by_distance()">Distance</a></li>
-                    <li><a class="dropdown-item" id="by_pet" onclick="map_by_pet()">Pet-friendly</a></li>
+                    <li><a class="dropdown-item" id="by_distance" onclick="mapByDistance()">Distance</a></li>
+                    <li><a class="dropdown-item" id="by_pet" onclick="mapByPet()">Pet-friendly</a></li>
                 </ul>
             </div>
         </div>
@@ -88,7 +86,7 @@
     <div id="map_view">
         <!-- Main Body -->
         <!-- MAPBOX -->
-        <div id='map' style='width: 100%; height: 800px;'></div>
+        <div id='map' style='width: 100%; height: 850px;'></div>
     </div>
 
     <!-- our own footer goes here-->
