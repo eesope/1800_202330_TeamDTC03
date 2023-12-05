@@ -206,6 +206,7 @@ function calculateDistance(userCoords, locationCoords) {
     return distance;
 }
 
+// calculate between user coords and fountain locations
 function byDistance(userCoords, locations) {
     console.log("by_distance called")
     return locations.sort((location1, location2) => {
@@ -235,8 +236,11 @@ function showPosition(position) {
     return coordinates
 }
 
+// for list
 function displayByDistance(collection) {
     let cardTemplate = document.getElementById("waterCardTemplate"); // Retrieve the HTML element with the ID "waterCardTemplate" and store it in the cardTemplate variable. 
+    document.getElementById('sorting').innerText = 'Distance';
+
 
     // Get user's location
     navigator.geolocation.getCurrentPosition(position => {
