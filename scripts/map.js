@@ -6,7 +6,7 @@ function showMap() {
     container: 'map', // Container ID
     style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
     center: [-123.1207, 49.2827], // Starting position [lng, lat]
-    zoom: 10 // Starting zoom
+    zoom: 15 // Starting zoom
   });
 
   // Add user controls to map (compass and zoom) to top left

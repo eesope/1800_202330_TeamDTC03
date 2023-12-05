@@ -27,7 +27,7 @@ Here are the steps ...
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
-* For unclear reason, some device's live server shows wrong current location 
+* For unclear reason, some device's live server detecting wrong current location 
 * ...
 * ...
 
@@ -93,8 +93,8 @@ Firebase hosting files:
 
 ## 9. Contact 
 * Saeyoung Park - spark363@my.bcit.ca 
-* Tony Lai - @my.bcit.ca
-* Ella Song - @my.bcit.ca
+* Tony Lai - mlai74@my.bcit.ca
+* Ella Song - msong49@my.bcit.ca
 
 ## Acknowledgements 
 * <a href="https://fonts.google.com/">Google Fonts</a>
