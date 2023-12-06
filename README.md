@@ -31,14 +31,16 @@ Here are the steps ...
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
 * For unclear reason, some device's live server detecting wrong current location 
-* ...
-* ...
+* The app reads Firebase database every time it loads; it cause Firebase database being quota exceeded.
 
 ## 6. Features for Future
 What we'd like to build in the future:
 * Users can post their profile photo
 * Users can share the location with others
 * Users can estimate how much water they drink
+* We would like to let users post their profile photo
+* We would like to let users share the location with 
+* We would like to let users change their reviews
 	
 ## 7. Contents of Folder
 Content of the project folder:
