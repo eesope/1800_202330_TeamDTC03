@@ -21,9 +21,12 @@ This browser based web application to ...
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps ...
-* ...
-* ...
-* ...
+  1. Open terminal. Got to a specific path.  Run `https://github.com/tonylai2022/1800_202330_TeamDTC03`
+  2. Open the directory of this folder in VS code
+  3. Open `index.html`
+  4. Create an account with your email and your password
+  5. Give permission to detect your location 
+
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
@@ -33,9 +36,9 @@ Here are some known bugs:
 
 ## 6. Features for Future
 What we'd like to build in the future:
-* We would like to let users post their profile photo
-* We would like to let users share the location with 
-* ...
+* Users can post their profile photo
+* Users can share the location with others
+* Users can estimate how much water they drink
 	
 ## 7. Contents of Folder
 Content of the project folder:
