@@ -28,8 +28,7 @@ Here are the steps ...
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
 * For unclear reason, some device's live server detecting wrong current location 
-* ...
-* ...
+* The app reads Firebase database every time it loads; it cause Firebase database being quota exceeded.
 
 ## 6. Features for Future
 What we'd like to build in the future:
