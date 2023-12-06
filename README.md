@@ -2,8 +2,7 @@
 VanWater
 
 ## 1. Project Description
-State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
-This browser based web application to ... 
+Due to the increasing concerns about water accessibility and the need to reduce single-use plastic bottle waste in Vancouver, we are creating “VanWater”, that is a mobile-first web app to help people in Vancouver find public drinking water fountains with just a few clicks on their phones not wasting time asking people or looking around.
 
 ## 2. Names of Contributors
 * Hi, My name is Saeyoung! I am excited to start this journey of creating a web application.
@@ -19,10 +18,8 @@ This browser based web application to ...
 * From Google Fonts: fonts, icons
 
 ## 4. Complete setup/installion/usage
-State what a user needs to do when they come to your project.  How do others start using your code or application?
-Here are the steps ...
-  1. Open terminal. Got to a specific path.  Run `https://github.com/tonylai2022/1800_202330_TeamDTC03`
-  2. Open the directory of this folder in VS code
+  1. Open terminal. Go to a specific path.  Run `git clone https://github.com/tonylai2022/1800_202330_TeamDTC03`
+  2. Open the directory of this folder
   3. Open `index.html`
   4. Create an account with your email and your password
   5. Give permission to detect your location 
@@ -30,18 +27,16 @@ Here are the steps ...
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
-* For unclear reason, some device's live server detecting wrong current location 
-* The app reads Firebase database every time it loads; it cause Firebase database being quota exceeded.
+* For unclear reason, some device's live server detecting wrong current location.
+* The app reads Firebase database every time it loads; it causes Firebase database quota being used up quickly.
 
 ## 6. Features for Future
 What we'd like to build in the future:
 * Users can post their profile photo
 * Users can share the location with others
+* Users can edit the reviews
 * Users can estimate how much water they drink
-* We would like to let users post their profile photo
-* We would like to let users share the location with 
-* We would like to let users change their reviews
-	
+
 ## 7. Contents of Folder
 Content of the project folder:
 
@@ -93,8 +88,8 @@ Firebase hosting files:
 ```
 
 ## 8. Limitations
-- Loading time in view change between map and list
-- Loading time in showing result from sorting feature
+- Long loading time in view change between map and list
+- Long loading time in showing result from sorting feature
 
 ## 9. Contact 
 * Saeyoung Park - spark363@my.bcit.ca 
