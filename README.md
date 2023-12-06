@@ -35,7 +35,7 @@ Here are some known bugs:
 What we'd like to build in the future:
 * We would like to let users post their profile photo
 * We would like to let users share the location with 
-* ...
+* We would like to let users change their reviews
 	
 ## 7. Contents of Folder
 Content of the project folder:
