@@ -4,10 +4,8 @@ VanWater
 ## 1. Project Description
 Due to the increasing concerns about water accessibility and the need to reduce single-use plastic bottle waste in Vancouver, we are creating “VanWater”, that is a mobile-first web app to help people in Vancouver find public drinking water fountains with just a few clicks on their phones not wasting time asking people or looking around.
 
-## 2. Names of Contributors
-* Hi, My name is Saeyoung! I am excited to start this journey of creating a web application.
-* Hi, my name is Tony! I am excited to do this project because I love to make this city smarter with tech.
-* Hi, my name is Ella!I am excited to start this project! I hope this project turns out wonderful!
+## 2. Demo video
+[LINK] (https://drive.google.com/file/d/1ELY4k3kUiYFt0VgBslCSZUdHOfpPjB_W/view?usp=sharing)
 	
 ## 3. Technologies and Resources Used
 * HTML, CSS, JavaScript
